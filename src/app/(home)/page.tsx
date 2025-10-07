@@ -45,8 +45,8 @@ export default function HomePage() {
           href: "/docs",
         }}
         secondaryCta={{
-          text: "Learn More",
-          href: "/about",
+          text: "Live Demo",
+          href: "https://memo.vaaat.com",
         }}
         demoImageLight={{
           src: "/screenshot.png",
