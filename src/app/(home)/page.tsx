@@ -6,10 +6,11 @@ export default function HomePage() {
     <main className="flex flex-1 flex-col">
       
       <HeroSection
+      version='v2.7.4'
         title={
           <>
             Open Source, <span className="block sm:inline">Self-hosted</span>
-            <span className="block text-teal-600">Your Memo, Your Way</span>
+            <span className="block text-cyan-600">Your Memo, Your Way</span>
           </>
         }
         subtitle="A next-generation open-source, self-hosted, lightweight federated publishing platform focused on personal idea sharing."
