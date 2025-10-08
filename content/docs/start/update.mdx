@@ -3,27 +3,43 @@ title: 更新
 description: 更新Ech0应用程序的详细指南
 ---
 
-### 🔄 Docker部署如何更新
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
-1. 停止当前的容器
+# 🔄 Docker部署如何更新
+
+
+
+<Steps>
+<Step>
+
+停止当前的容器
 
 ```shell
 docker stop ech0
 ```
 
-2. 移除容器
+</Step>
+
+
+<Step>
+移除容器
 
 ```shell
 docker rm ech0
 ```
+</Step>
 
-3. 拉取最新的镜像
+<Step>
+拉取最新的镜像
 
 ```shell
 docker pull sn0wl1n/ech0:latest
 ```
 
-4. 启动新版本的容器
+</Step>
+
+<Step>
+启动新版本的容器
 
 ```shell
 docker run -d \
@@ -35,21 +51,35 @@ docker run -d \
   -e JWT_SECRET="Hello Echos" \
   sn0wl1n/ech0:latest
 ```
+</Step>
+</Steps>
 
-### 💎 Docker Compose部署如何更新
+---
 
-1. 进入 compose 文件目录
+# 💎 Docker Compose部署如何更新
+
+<Steps>
+<Step>
+
+进入 compose 文件目录
 ```shell
 cd /path/to/compose
 ```
 
-2. 拉取最新镜像并重启
+</Step>
+<Step>
+拉取最新镜像并重启
 ```shell
 docker-compose pull && \
 docker-compose up -d --force-recreate
 ```
+</Step>
+<Step>
 
-3. 清理旧镜像 
+清理旧镜像 
 ```shell
 docker image prune -f
 ```
+</Step>
+
+</Steps>
