@@ -1,0 +1,71 @@
+---
+title: 开发指南
+description: 开发环境搭建和前后端联调指南
+---
+
+## 项目架构
+
+![技术架构图](/docs/Ech0技术架构图.svg)
+> by ExcaliDraw
+---
+
+## 开发指南
+### 后端环境要求  
+📌 **Go 1.25.1+**
+
+📌 **C 编译器**  
+使用 `go-sqlite3` 等需要 CGO 的库时，需安装：  
+- Windows：
+    - [MinGW-w64](https://winlibs.com/)
+    - 解压后将bin目录添加到PATH
+- macOS： `brew install gcc`
+- Linux： `sudo apt install build-essential`
+
+📌 **Google Wire**  
+安装[wire](https://github.com/google/wire)用于依赖注入文件生成:  
+- `go install github.com/google/wire/cmd/wire@latest`
+
+📌 **Golangci-Lint**  
+安装[Golangci-Lint](https://golangci-lint.run/)用于lint和fmt:  
+- 在项目根目录下执行`golangci-lint run`进行lint  
+- 在项目根目录下执行`golangci-lint fmt`进行格式化  
+
+📌 **Swagger**  
+安装[Swagger](https://github.com/swaggo/gin-swagger)用于生成和使用符合OpenAPI规范的接口文档
+- 在项目根目录下执行`swag init -g internal/server/server.go -o internal/swagger`后生成或更新swagger文档  
+- 打开浏览器访问`http://localhost:6277/swagger/index.html`查看和使用swagger文档  
+
+### 前端环境要求  
+📌  **NodeJS v24.5.0+, PNPM v10.17.1+**
+> 注：如需要多个nodejs版本共存可使用[fnm](https://github.com/Schniz/fnm)进行管理  
+
+---
+
+### 启动前后端联调  
+**第一步： 后端（在 Ech0 根目录下）：**
+```shell
+go run cmd/ech0/main.go # 编译并启动后端
+```
+> 如果依赖注入关系发生了变化先需要在`ech0/internal/di/`下执行`wire`命令生成新的`wire_gen.go`文件
+
+**第二步： 前端（新终端）：**  
+```shell
+cd web # 进入前端目录
+
+pnpm install # 如果没有安装依赖则执行
+
+pnpm dev # 启动前端预览
+```
+
+**第三步： 前后端启动后访问：**  
+前端预览： http://localhost:5173 （端口在启动后可在控制台查看）  
+后端预览： http://localhost:6277 （默认后端端口为6277） 
+
+> 对使用**层次化架构的包**进行导入时，请使用**规范的 alias 命名**：  
+> model 层： `xxxModel`  
+> util 层： `xxxUtil`  
+> handler 层： `xxxHandler`  
+> service 层： `xxxService`  
+> repository 层： `xxxRepository`  
+
+---
