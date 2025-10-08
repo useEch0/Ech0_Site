@@ -1,44 +1,41 @@
 ---
-title: What is Ech0?
-description: A next-generation open-source, self-hosted, lightweight federated publishing platform focused on personal idea sharing.
+title: 什么是 Ech0？
+description: 面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。
 ---
 
+**Ech0** 是一款专为个人用户设计的新一代开源自托管平台，低成本、超轻量，支持 ActivityPub 协议，让你轻松发布和分享想法、文字与链接。
+简洁直观的界面结合高效的命令行工具，让内容管理变得简单而自由。
+你的数据完全自主可控，随时随地与世界联通，构建属于你的思想网络。
 
 
-**Ech0** is a new-generation open-source self-hosted platform designed for individual users.
-It is ultra-lightweight and low-cost, supporting the ActivityPub protocol to let you easily publish and share ideas, writings, and links. With a clean, intuitive interface and powerful command-line tools, content management becomes simple and flexible.
-Your data is fully owned and controlled by you, always connected to the world, building your own network of thoughts.
+## 核心优势
 
-
-## Highlights
-
-- ☁️ **Ultra Lightweight** — Memory usage under **15MB**, image size under **50MB**, single SQLite file storage.
-- 🚀 **Blazing Fast Deployment** — No configuration needed, install and use with just one command.
-- 🧰 **Command-line Power** — Built-in high-availability CLI tools that support one-click backup, restore, and export.
-- 📟 **TUI Friendly** — Terminal-friendly interactive interface to manage Ech0 from the TUI.
-- ✍️ **Distraction-Free Writing** — Clean online Markdown editor with rich plugin support and live preview.
-- 📦 **Data Ownership** — All content stored locally in SQLite, with RSS feed support.
-- 🔐 **Secure Backup** — One-click export/backup/import via Web, TUI, or CLI.
-- ♻️ **Seamless Restore** — Restore any backup via TUI or CLI to ensure data safety.
-- 🎉 **Completely Free** — Open-source under AGPL-3.0 with no tracking, subscription, or dependency.
-- 🌍 **Cross-Device Compatible** — Fully responsive on desktop, tablet, and mobile.
-- 👾 **PWA Support** — Can be installed as a Web App.
-- ☁️ **S3 Storage Support** — Native integration with S3-compatible object storage for local or cloud backups.
-- 🌐 **ActivityPub Federation** — Native ActivityPub support for interoperability with Mastodon, Misskey etc.
-- 📝 **Built-in Todo Management** — Record and track daily tasks efficiently.
-- 🔑 **OAuth2 Integration** — Full OAuth2 support for secure third-party authentication and API access.
-- 🔗 **Ech0 Connect** — Cross-instance content aggregation, subscription, and synchronization.
-- 🎵 **Music Integration** — Lightweight audio player for local streaming and immersive background music.
-- 🎥 **Video Sharing** — Native support for Bilibili/YouTube smart parsing.
-- 🃏 **Rich Card Support** — Share website links, GitHub projects, and other media-rich content.
-- ⚙️ **Advanced Customization** — Custom styles and scripts for enhanced content presentation.
-- 💬 **Comment System** — Integrate Twikoo for lightweight interaction and feedback.
-- 💻 **Cross-Platform** — Native support for Windows, Linux, and ARM devices like Raspberry Pi.
-- 🔗 **Official Ech0 Hub Integration** — Submit content to the Ech0 Hub ecosystem easily.
-- 🌐 **Self-Hosted Ech0 Hub** — Use your Connect list as a content source.
-- 📦 **Self-contained Binary** — Full frontend resources included, single binary file ready to run.
-- 🔗 **Rich API Support** — Open API available for integration with other systems.
-- 🃏 **Content Display** — Supports X (Twitter)-style card display with social interactions.
-- 👤 **Multi-user and Permissions** — Flexible account and permission management for secure access.
+☁️ **原子级轻量**：内存占用不到**15MB**，镜像大小不到**50MB**,单SQLite文件存储架构  
+🚀 **极速部署**：无需配置，从安装到使用只需1条命令  
+🧰 **命令行利器**：内置高可用 CLI 工具，支持一键备份、恢复、导出  
+📟 **极致 TUI 支持**：面向终端用户打造的友好交互界面，轻松进行对Ech0进行管理  
+✍️ **零干扰写作**：纯净的在线Markdown编辑器，支持丰富的Markdown插件与预览  
+📦 **数据主权**：所有内容存储于本地SQLite文件，支持RSS订阅  
+🔐 **安全备份机制**：支持Web、TUI、CLI三种模式下一键导出、备份完整数据  
+♻️ **无感恢复支持**：通过TUI/CLI/Web 即可恢复任意备份，保障数据安全无忧  
+🎉 **永久免费**：AGPL-3.0协议开源，无追踪/无订阅/无服务依赖  
+🌍 **跨端适配**：完美兼容桌面/移动浏览器，支持手机、iPad、PC三端响应式布局  
+👾 **PWA适配**：支持作为Web应用安装，体验更接近原生  
+☁️ **S3 存储集成** —— 原生适配 S3 兼容对象存储，轻松实现云端高效存储  
+🌐 **ActivityPub 联邦** —— 与 Mastodon、Misskey 等平台互联共通，构建去中心化生态  
+🔑 **OAuth2 集成** —— 原生支持 OAuth2 协议，轻松接入第三方登录与 API 授权。
+📝 **内置Todo管理**：轻松记录、管理每日待办事项，帮助你高效规划和追踪任务进度  
+🔗 **Ech0 Connect**：全新多实例互联功能，实现Ech0实例间状态订阅与跟踪  
+🎵 **无缝音乐集成**: 内置超低资源占用的音乐播放器，提供沉浸式背景音乐与专注模式  
+🎥 **即时视频分享**: 原生支持哔哩哔哩/YouTube视频智能解析  
+🃏 **丰富的快捷卡片**：支持网站链接、GitHub项目等多种富媒体内容一键分享，让信息展示更加直观生动  
+⚙️ **高级自定义功能**：为高级用户提供便捷自定义样式与脚本，分享更具表现力  
+💬 **评论系统**：支持快捷接入Twikoo评论服务，轻量、快捷、无侵入，为你的内容带来即时互动与反馈  
+💻 **跨平台兼容**：原生支持 Windows、Linux 以及树莓派等 ARM 架构设备，确保多样化部署场景下稳定运行  
+🔗 **Ech0 Hub 广场接入**：支持手动提交接入官方 Ech0 Hub 内容生态，轻松发现、订阅和共享优质内容  
+📦 **二进制自包含**：集成完整资源，无需额外安装依赖或配置，极大简化部署流程  
+🔗 **丰富的 API 支持**: 提供开放 API，方便与其他系统集成，实现更灵活的应用场景。  
+🃏 **内容展示支持**：支持类 X（Twitter）风格卡片展示，同时支持点赞等社交互动  
+👤 **多账户权限管理**：支持多账户体系，提供灵活的权限控制，保障内容和功能访问的安全性与私密性  
 
 ---
