@@ -3,6 +3,9 @@
     "pages": [
         "connect",
         "comment",
-        "metingapi"
+        "metingapi",
+        "oauth",
+        "s3",
+        "datacontrol"
     ]
 }
