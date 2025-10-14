@@ -7,7 +7,7 @@ export default function HomePage() {
     <main className="relative flex flex-1 flex-col">
       <div className="flex flex-1 flex-col">
         <HeroSection
-        version="v2.8.0"
+        version="v2.8.1"
         title={
           <>
             <TextType
