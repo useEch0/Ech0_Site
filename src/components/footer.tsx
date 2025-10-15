@@ -10,17 +10,17 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">Ech0</h3>
             <p className="text-sm text-fd-muted-foreground leading-relaxed">
-              A next-generation open-source, self-hosted, lightweight federated publishing platform focused on personal idea sharing.
+              面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。
             </p>
           </div>
 
           {/* Product */}
           <div>
-            <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">Product</h3>
+            <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">产品</h3>
             <ul className="space-y-2 sm:space-y-3 text-sm">
               <li>
                 <Link href="/docs" className="text-fd-muted-foreground hover:text-fd-foreground transition-colors">
-                  Documentation
+                  文档
                 </Link>
               </li>
             </ul>
@@ -28,7 +28,7 @@ export function Footer() {
 
           {/* Community */}
           <div>
-            <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">Community</h3>
+            <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">社区</h3>
             <ul className="space-y-2 sm:space-y-3 text-sm">
               <li>
                 <a

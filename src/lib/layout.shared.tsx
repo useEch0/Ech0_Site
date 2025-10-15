@@ -22,7 +22,7 @@ export function baseOptions(): BaseLayoutProps {
     // see https://fumadocs.dev/docs/ui/navigation/links
     links: [
       {
-        text: 'Documentation',
+        text: '文档',
         url: '/docs',
       }
     ],

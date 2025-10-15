@@ -76,7 +76,8 @@ version,
       </div>
 
       {(demoImageLight || demoImageDark) && (
-        <div className="mt-8 sm:mt-12 w-full max-w-6xl overflow-auto">
+        //TODO 这个会使图片在小屏幕溢出
+        <div className="mt-8 sm:mt-12 w-fit max-w-6xl overflow-auto">
           {demoImageLight && (
             <img src={demoImageLight.src} alt={demoImageLight.alt} className="w-[200vw] max-w-none sm:w-full h-auto block dark:hidden" />
           )}

@@ -82,7 +82,8 @@
   --color-fd-background: #FFF4E5;
   --color-fd-accent: #c4bdb25d;
   --color-fd-foreground: #393022;
-  /* --color-fd-muted-foreground: #655a49; */
+  --color-fd-muted-foreground: #655a49;
+  --color-fd-muted: #FFF4E5;
 }
 
 .dark {
@@ -124,6 +125,7 @@
   --color-fd-foreground: #ffffff;
   --color-fd-primary: #ffffff;
   --color-fd-muted-foreground: #919191;
+  --color-fd-muted: #212121;
 
 
 }
