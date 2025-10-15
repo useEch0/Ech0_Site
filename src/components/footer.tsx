@@ -57,16 +57,28 @@ export function Footer() {
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </li>
+              
+                            <li>
+                <a
+                  href="https://qm.qq.com/cgi-bin/qm/qr?group_code=1065435773"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-fd-muted-foreground hover:text-fd-foreground transition-colors"
+                >
+                  官方QQ群
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Legal */}
           <div>
-            <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">Legal</h3>
+            <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">法律</h3>
             <ul className="space-y-2 sm:space-y-3 text-sm">
               <li>
                 <Link href="/privacy" className="text-fd-muted-foreground hover:text-fd-foreground transition-colors">
-                  Privacy Policy
+                  隐私政策
                 </Link>
               </li>
               {/* <li>
