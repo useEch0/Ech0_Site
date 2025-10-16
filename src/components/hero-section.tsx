@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 interface HeroSectionProps {
   version?: string;
+  versionUrl?: string;
   title: ReactNode;
   subtitle: string;
   primaryCta: {
@@ -26,7 +27,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({
-version,
+  version,
+  versionUrl = "https://github.com/lin-snow/Ech0/releases", // ✅ 默认还是 GitHub Releases
   title,
   subtitle,
   primaryCta,
@@ -36,11 +38,10 @@ version,
 }: HeroSectionProps) {
   return (
     <section className="flex flex-col items-center justify-center pt-12 text-center dark:from-gray-950 dark:to-cyan-800/30">
-      
-        {version && (
+      {version && (
         <div className="mb-4 sm:mb-6">
           <Link
-            href="https://github.com/lin-snow/Ech0/releases"
+            href={versionUrl} // ✅ 改成传入的链接
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-[#F43900] dark:text-orange-200 bg-orange-100 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-700 rounded-full hover:bg-orange-200 dark:hover:bg-orange-900/50 hover:shadow-sm transition-all"
@@ -76,7 +77,6 @@ version,
       </div>
 
       {(demoImageLight || demoImageDark) && (
-        //TODO 这个会使图片在小屏幕溢出
         <div className="mt-8 sm:mt-12 w-fit max-w-6xl overflow-auto">
           {demoImageLight && (
             <img src={demoImageLight.src} alt={demoImageLight.alt} className="w-[200vw] max-w-none sm:w-full h-auto block dark:hidden" />
