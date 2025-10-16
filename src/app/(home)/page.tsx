@@ -26,11 +26,16 @@ export default function HomePage() {
     fetchVersion();
   }, []);
 
+  const versionUrl = version.startsWith("v")
+    ? `https://github.com/lin-snow/Ech0/releases/tag/${version}`
+    : undefined;
+
   return (
     <main className="relative flex flex-1 flex-col">
       <div className="flex flex-1 flex-col">
         <HeroSection
           version={version}
+          versionUrl={versionUrl}
           title={
             <>
               <TextType
