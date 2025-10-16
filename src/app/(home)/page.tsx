@@ -35,7 +35,7 @@ export default function HomePage() {
       <div className="flex flex-1 flex-col">
         <HeroSection
           version={version}
-          versionUrl={versionUrl}
+          versionUrl="https://github.com/lin-snow/Ech0/releases"
           title={
             <>
               <TextType
