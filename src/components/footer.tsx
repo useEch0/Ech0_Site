@@ -38,7 +38,7 @@ export function Footer() {
                   className="inline-flex items-center gap-1 text-fd-muted-foreground hover:text-fd-foreground transition-colors"
                 >
                   <Github className="w-4 h-4" />
-                  GitHub
+                  GitHub Repo
                 </a>
               </li>
               {/* <li>
@@ -53,12 +53,12 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-fd-muted-foreground hover:text-fd-foreground transition-colors"
                 >
-                  Discussions
-                  <ExternalLink className="w-3 h-3" />
+                  <Github className="w-4 h-4" />
+                  Github Discussions
                 </a>
               </li>
-              
-                            <li>
+
+              <li>
                 <a
                   href="https://qm.qq.com/cgi-bin/qm/qr?group_code=1065435773"
                   target="_blank"

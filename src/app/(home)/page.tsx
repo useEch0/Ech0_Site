@@ -12,8 +12,8 @@ export default function HomePage() {
             <>
               <TextType
                 as="span"
-                // className="block sm:inline text-black dark:text-white"
-                textColors={[]}
+                className="block sm:inline text-[var(--color-fd-primary)] dark:text-white"
+                // textColors={[]}
                 text="你好,"
                 loop={false}
                 showCursor={false}
@@ -21,13 +21,11 @@ export default function HomePage() {
 
               <TextType
               as="span"
-              // className="block !text-cyan-600"
-              // textColors={["#oklch(60.9% 0.126 221.723)"]}
+              className="block sm:inline text-[#F43900] dark:text-white"
               text=" Ech0"
               loop={false}
               typingSpeed={45}
               initialDelay={1800}
-              // cursorClassName="text-cyan-600"
             />
             </>
           }

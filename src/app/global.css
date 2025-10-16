@@ -139,3 +139,7 @@
     @apply bg-background text-foreground;
   }
 }
+:root ::selection {
+  background-color: #fae2bf;
+  color: #655a49;
+}
