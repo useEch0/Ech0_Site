@@ -1,3 +1,4 @@
+// TODO 支持中文
 import { source } from '@/lib/source';
 import { createFromSource } from 'fumadocs-core/search/server';
 
