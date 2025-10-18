@@ -1,12 +1,12 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/hero-section";
 import { Footer } from "@/components/footer";
 import TextType from "@/components/ui/texttype";
 
 export default function HomePage() {
-  const [version, setVersion] = useState("最新版本");
+  const [version, setVersion] = useState("加载中...");
+  const [versionUrl, setVersionUrl] = useState("https://github.com/lin-snow/Ech0/releases");
 
   useEffect(() => {
     async function fetchVersion() {
@@ -14,7 +14,9 @@ export default function HomePage() {
         const res = await fetch("https://api.github.com/repos/lin-snow/Ech0/tags");
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
-          setVersion(data[0].name);
+          const latestVersion = data[0].name;
+          setVersion(latestVersion);
+          setVersionUrl(`https://github.com/lin-snow/Ech0/releases/tag/${latestVersion}`);
         } else {
           setVersion("最新版本");
         }
@@ -26,16 +28,12 @@ export default function HomePage() {
     fetchVersion();
   }, []);
 
-  const versionUrl = version.startsWith("v")
-    ? `https://github.com/lin-snow/Ech0/releases/tag/${version}`
-    : undefined;
-
   return (
     <main className="relative flex flex-1 flex-col">
       <div className="flex flex-1 flex-col">
         <HeroSection
           version={version}
-          versionUrl="https://github.com/lin-snow/Ech0/releases"
+          versionUrl={versionUrl}
           title={
             <>
               <TextType

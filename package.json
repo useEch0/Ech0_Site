@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "build:static": "node scripts/generate-llm-text.js && next build",
+    "generate:llm": "node scripts/generate-llm-text.js",
     "dev": "next dev --turbo",
     "start": "next start",
     "postinstall": "fumadocs-mdx",
