@@ -31,7 +31,7 @@ export default function ExampleTeamPage() {
     id: i,
     name: m.username,
     role: m.role,
-    bio: "加载中...",
+    bio: null,
     avatarUrl: null,
     socials: { github: `https://github.com/${m.username}` },
   }));
