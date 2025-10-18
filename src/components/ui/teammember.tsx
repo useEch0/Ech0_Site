@@ -53,7 +53,7 @@ export default function TeamGrid({ members, columns = 3, className = "" }: TeamG
         {members.map((m) => (
           <article
             key={m.id}
-            className="rounded-2xl p-5 bg-yellow-50 border border-yellow-100 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:shadow-black/20"
+            className="rounded-2xl p-5 bg-[#FFFCF0] border border-[#FFF4E5] shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:shadow-black/20"
           >
             <div className="flex items-start gap-4">
               {m.avatarUrl ? (

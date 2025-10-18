@@ -9,7 +9,7 @@ export const WritingBanner: React.FC = () => {
         '#FFFCF0',
       ]}
       changeLayout={false}
-      className="text-[#F43900] dark:text-[#fff]"
+      className="text-[#F43900] dark:text-[#fff] rounded-2xl "
     >
       此文档正在编写...
     </Banner>

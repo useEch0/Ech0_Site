@@ -45,7 +45,7 @@ export default function HomePage() {
               />
               <TextType
                 as="span"
-                className="block sm:inline text-[#F43900] dark:text-white"
+                className="block sm:inline text-[#F43900] dark:text-[#F43900]"
                 text=" Ech0"
                 loop={false}
                 typingSpeed={45}
