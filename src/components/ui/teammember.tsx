@@ -3,14 +3,6 @@
 import React from "react";
 import { Github, Mail } from "lucide-react";
 
-const palette = {
-  dark: "#393022",
-  medium: "#655a49",
-  light: "#fae2bf",
-  soft: "#FFF4E5",
-  background: "#FFFCF0",
-};
-
 type TeamMember = {
   id: string | number;
   name: string;
@@ -36,11 +28,9 @@ function Initials({ name }: { name: string }) {
     .slice(0, 2)
     .join("")
     .toUpperCase();
+
   return (
-    <div
-      className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold"
-      style={{ background: palette.light, color: palette.dark }}
-    >
+    <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold bg-yellow-100 text-yellow-900 dark:bg-yellow-900 dark:text-yellow-100">
       {initials}
     </div>
   );
@@ -56,20 +46,14 @@ export default function TeamGrid({ members, columns = 3, className = "" }: TeamG
 
   return (
     <section
-      className={`w-full ${className}`}
+      className={`w-full ${className} bg-transparent text-gray-900 dark:text-gray-100`}
       aria-label="组员"
-      style={{ background: palette.background, color: palette.dark }}
     >
       <div className={`grid gap-4 ${gridColsClass}`}>
         {members.map((m) => (
           <article
             key={m.id}
-            className="rounded-2xl p-5"
-            style={{
-              background: palette.soft,
-              border: `1px solid ${palette.light}`,
-              boxShadow: `0 2px 6px ${palette.light}55`,
-            }}
+            className="rounded-2xl p-5 bg-yellow-50 border border-yellow-100 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:shadow-black/20"
           >
             <div className="flex items-start gap-4">
               {m.avatarUrl ? (
@@ -83,21 +67,13 @@ export default function TeamGrid({ members, columns = 3, className = "" }: TeamG
                 <Initials name={m.name} />
               )}
               <div className="flex-1 min-w-0">
-                <h3 className="text-base font-semibold truncate" style={{ color: palette.dark }}>
-                  {m.name}
-                </h3>
-                {m.role && (
-                  <p className="text-sm truncate" style={{ color: palette.medium }}>
-                    {m.role}
-                  </p>
-                )}
+                <h3 className="text-base font-semibold truncate">{m.name}</h3>
+                {m.role && <p className="text-sm truncate text-gray-600 dark:text-gray-400">{m.role}</p>}
               </div>
             </div>
 
             {m.bio && (
-              <p className="text-sm mt-4 line-clamp-3" style={{ color: palette.medium }}>
-                {m.bio}
-              </p>
+              <p className="text-sm mt-4 line-clamp-3 text-gray-600 dark:text-gray-400">{m.bio}</p>
             )}
 
             <div className="flex items-center gap-3 mt-4">
@@ -108,13 +84,13 @@ export default function TeamGrid({ members, columns = 3, className = "" }: TeamG
                   rel="noreferrer"
                   aria-label={`${m.name} 的 GitHub`}
                 >
-                  <Github size={16} style={{ color: palette.medium }} className="hover:opacity-75" />
+                  <Github size={16} className="text-gray-600 dark:text-gray-400 hover:opacity-75" />
                 </a>
               )}
 
               {m.socials?.email && (
                 <a href={`mailto:${m.socials.email}`} aria-label={`Email ${m.name}`}>
-                  <Mail size={16} style={{ color: palette.medium }} className="hover:opacity-75" />
+                  <Mail size={16} className="text-gray-600 dark:text-gray-400 hover:opacity-75" />
                 </a>
               )}
             </div>
