@@ -69,7 +69,7 @@ export default function ExampleTeamPage() {
   }, []);
 
   return (
-    <main className="flex items-center justify-center p-8 bg-[#FFFCF0]">
+    <main className="flex items-center justify-center p-8">
       <div className="max-w-5xl w-full">
         <TeamGrid members={members} columns={3} />
       </div>
