@@ -63,11 +63,11 @@ export default function HomePage() {
             href: "https://memo.vaaat.com",
           }}
           demoImageLight={{
-            src: "/screenshot.png",
+            src: "/screenshot-progressive.jpeg",
             alt: "Ech0 Light Mode Demo",
           }}
           demoImageDark={{
-            src: "/screenshot.png",
+            src: "/screenshot-progressive.jpeg",
             alt: "Ech0 Dark Mode Demo",
           }}
         />
