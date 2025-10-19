@@ -2,7 +2,89 @@
 title: S3 存储集成
 description: 原生适配 S3 兼容对象存储，轻松实现云端高效存储
 ---
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-import { WritingBanner } from "@/components/page/writingbanner";
+### 配置前准备
 
-<WritingBanner />
+在填写配置信息前，需要准备好以下资料：
+
+1.  **S3 存储桶名称**：在云平台上创建的、用于存放数据的存储桶的名称。
+2.  **访问密钥**：用于身份验证的用户凭证，类似用户名。
+3.  **私密密钥**：用于身份验证的私有凭证，类似密码，请务必妥善保管。
+4.  **S3 端点地址**：用于连接存储服务的网络地址。如果使用的是AWS S3，官方端点通常为`s3.[region].amazonaws.com`；如果使用的是其他兼容服务（如MinIO、阿里云OSS、腾讯云COS等），请使用其提供的特定端点。
+
+---
+
+### 配置项
+
+#### 启用 S3 存储
+
+*   描述：此开关用于控制是否开启与S3存储的连接。
+*   操作：将此开关设置为 **“开启”** 状态，以激活所有后续配置项。
+
+#### 启用 SSL
+
+*   描述：SSL（Secure Sockets Layer）是一种加密协议，用于确保数据在传输过程中的安全性。**强烈建议始终启用**，以防止敏感信息泄露。
+*   操作：将此开关设置为 **“开启”** 状态。
+
+#### S3 服务
+
+*   描述：此选项用于预设不同云服务提供商的配置模板。
+*   操作：从下拉菜单中选择 S3 提供商，
+
+#### S3 Endpoint
+
+*   描述：您的S3服务的访问地址。
+*   操作：在文本框中准确输入您存储服务的端点地址。
+*   示例：`s3.[region].amazonaws.com`
+
+#### Access Key | 访问密钥
+
+*   描述：您的API访问密钥ID。
+*   操作：在文本框中粘贴或输入您的Access Key。
+
+#### Secret Key | 私密密钥
+
+*   描述：您的API私密密钥。此信息极其敏感，请勿泄露。
+*   操作：在文本框中粘贴或输入您的Secret Key。
+
+#### S3 Bucket | 存储桶
+
+*   描述：您希望系统用于存储文件的存储桶名称。
+*   操作：在文本框中输入存储桶名称。
+*   示例：`pic`
+
+#### Path Prefix | 路径前缀
+
+*   描述：可选。在存储桶内指定一个路径前缀，所有文件都将被存储在此路径下。
+*   操作：在文本框中输入您希望使用的路径名称。
+*   示例：`echo0` (文件将最终存储在 `s3://spic/echo0/` 路径下)
+
+#### S3 Region
+
+*   描述：存储桶的访问地域，仅在 "S3 服务" 处选择 AWS 是可填写
+*   操作：输入 AWS S3 中选择的存储地域。
+*   示例：`ap-southeast-1`
+
+---
+
+### 重要注意事项
+
+*   **权限**：确保您使用的Access Key和Secret Key至少拥有对指定Bucket的 `List`、`Put`、`Get` 和 `Delete` 权限。
+*   **存储桶策略**：部分云服务（如AWS S3）可能需要额外配置存储桶策略，允许来自您服务器的IP地址或IAM角色的访问。
+
+---
+
+### 常见问题 | FAQ
+
+<Accordions type="multiple">
+  <Accordion title="Path Prefix必须填写吗？">不是必填项。如果不填写，文件会直接存储在存储桶的根目录。但为了便于管理，强烈建议填写一个有意义的名称作为前缀。</Accordion>
+
+  <Accordion title="保存时提示“Access Denied”，怎么办？">
+  这通常是权限问题。请检查：
+
+1.  Access Key和Secret Key是否正确。
+2.  对应的IAM用户或策略是否包含对目标Bucket的读写权限。
+3.  存储桶是否存在拼写错误。
+  </Accordion>
+</Accordions>

@@ -124,7 +124,7 @@ export default function ColorBlock({
                 }}
                 aria-label={`Color swatch ${c}`}
                 title={copyOnClick ? `Click to copy ${c}` : String(c)}
-                className={`rounded-2xl overflow-hidden shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-fd-primary)]-300 transition-transform transform hover:scale-[1.02] ${swatchSize}`}
+                className={`rounded-2xl overflow-hidden shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-fd-primary)]-300 transition-transform transform hover:scale-[1.02] ${swatchSize} cursor-pointer`}
                 style={{ background: c ?? "transparent" }}
               />
 
