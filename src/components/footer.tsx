@@ -74,13 +74,8 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">法律</h3>
+            <h3 className="font-semibold text-fd-foreground mb-3 sm:mb-4">使用协议</h3>
             <ul className="space-y-2 sm:space-y-3 text-sm">
-              <li>
-                <Link href="/docs/legal/user-agreement/" className="text-fd-muted-foreground hover:text-fd-foreground transition-colors">
-                  用户协议
-                </Link>
-              </li>
               <li>
                 <Link href="/docs/legal/privacy/" className="text-fd-muted-foreground hover:text-fd-foreground transition-colors">
                   隐私政策
