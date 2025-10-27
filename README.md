@@ -43,3 +43,10 @@ resources:
   features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+
+## 致谢
+
+- 感谢广大用户提供的各种改进建议和问题反馈
+- 感谢所有开源社区的贡献者与支持者
+
+[![Contributors](https://contrib.rocks/image?repo=useEch0/Ech0_Site)](https://contrib.rocks/image?repo=useEch0/Ech0_Site)
