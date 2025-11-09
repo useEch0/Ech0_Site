@@ -6,6 +6,7 @@
         "metingapi",
         "oauth",
         "s3",
-        "datacontrol"
+        "datacontrol",
+        "webhook"
     ]
 }

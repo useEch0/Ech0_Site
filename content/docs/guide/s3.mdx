@@ -80,6 +80,8 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 <Accordions type="multiple">
   <Accordion title="Path Prefix必须填写吗？">不是必填项。如果不填写，文件会直接存储在存储桶的根目录。但为了便于管理，强烈建议填写一个有意义的名称作为前缀。</Accordion>
 
+  <Accordion title="填写正确依然无法上传？">这种情况可打开浏览器查看是否出现CORS的报错，如果有则代表你可能需要到S3提供商配置CORS策略</Accordion>
+
   <Accordion title="保存时提示“Access Denied”，怎么办？">
   这通常是权限问题。请检查：
 

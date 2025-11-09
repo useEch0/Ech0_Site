@@ -1,79 +1,89 @@
-"use client";
-import { useEffect, useState } from "react";
-import { HeroSection } from "@/components/hero-section";
-import { Footer } from "@/components/footer";
-import TextType from "@/components/ui/texttype";
+import type { Metadata } from "next";
+import HomePageClient from "./home-client";
 
-export default function HomePage() {
-  const [version, setVersion] = useState("加载中...");
-  const [versionUrl, setVersionUrl] = useState("https://github.com/lin-snow/Ech0/releases");
+export const metadata: Metadata = {
+  metadataBase: new URL("https://ech0.soopy.cn"),
+  title: {
+    default: "Ech0 - Next-Generation Open Source Federated Publishing Platform",
+    template: "%s | Ech0",
+  },
+  description:
+    "面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。",
+  keywords: [
+    "Ech0",
+    "useEch0",
+    "open source",
+    "self-hosted",
+    "ActivityPub",
+    "federated",
+    "publishing",
+    "markdown",
+    "notes",
+    "personal blog",
+    "privacy",
+    "AGPL-3.0",
+  ],
+  authors: [{ name: "L1nSn0w", url: "https://github.com/lin-snow" }],
+  creator: "L1nSn0w",
+  publisher: "Ech0 Project",
 
-  useEffect(() => {
-    async function fetchVersion() {
-      try {
-        const res = await fetch("https://api.github.com/repos/lin-snow/Ech0/tags");
-        const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
-          const latestVersion = data[0].name;
-          setVersion(latestVersion);
-          setVersionUrl(`https://github.com/lin-snow/Ech0/releases/tag/${latestVersion}`);
-        } else {
-          setVersion("最新版本");
-        }
-      } catch (err) {
-        console.error("Failed to fetch version:", err);
-        setVersion("最新版本");
-      }
-    }
-    fetchVersion();
-  }, []);
+  openGraph: {
+    title: "Ech0 - Open Source, Self-Hosted Federated Publishing Platform",
+    description:
+      "面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。",
+    url: "https://ech0.soopy.cn",
+    siteName: "Ech0",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ech0 Dashboard Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 
-  return (
-    <main className="relative flex flex-1 flex-col">
-      <div className="flex flex-1 flex-col">
-        <HeroSection
-          version={version}
-          versionUrl={versionUrl}
-          title={
-            <>
-              <TextType
-                as="span"
-                className="block sm:inline text-[var(--color-fd-primary)] dark:text-white"
-                text="你好,"
-                loop={false}
-                showCursor={false}
-              />
-              <TextType
-                as="span"
-                className="block sm:inline text-[#F43900] dark:text-[#F43900]"
-                text=" Ech0"
-                loop={false}
-                typingSpeed={45}
-                initialDelay={1800}
-              />
-            </>
-          }
-          subtitle="面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。"
-          primaryCta={{
-            text: "开始使用",
-            href: "/docs",
-          }}
-          secondaryCta={{
-            text: "在线Demo",
-            href: "https://memo.vaaat.com",
-          }}
-          demoImageLight={{
-            src: "/screenshot.png",
-            alt: "Ech0 Light Mode Demo",
-          }}
-          demoImageDark={{
-            src: "/screenshot.png",
-            alt: "Ech0 Dark Mode Demo",
-          }}
-        />
+  twitter: {
+    card: "summary_large_image",
+    title: "Ech0 - Federated Publishing Platform for Creative Minds",
+    description:
+      "面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。",
+    images: ["/og-image.png"],
+    creator: "@useEch0",
+  },
 
-        <Footer />
-      </div>
-    </main>
-  );
+  alternates: {
+    canonical: "https://ech0.soopy.cn",
+    languages: {
+      en: "https://useech0.com/en",
+      zh: "https://useech0.com/zh",
+    },
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.png",
+    apple: "/apple-touch-icon.png",
+  },
+
+  manifest: "/site.webmanifest",
+
+  category: "Software",
+  applicationName: "Ech0",
+
+  other: {
+    "theme-color": "#0f172a",
+    "msapplication-TileColor": "#0f172a",
+    "og:release": "v1.0.0",
+    "og:license": "AGPL-3.0",
+    "og:github": "https://github.com/lin-snow/Ech0",
+    "og:docs": "https://useech0.com/docs",
+  },
+};
+
+export default function Page() {
+  // HomePageClient 是单独的客户端组件
+  return <HomePageClient />;
 }

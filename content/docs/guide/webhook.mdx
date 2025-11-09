@@ -1,0 +1,125 @@
+---
+title: 高可用 Webhook
+description: 支持与外部系统进行实时扩展与协作，实现事件驱动的自动化工作流
+---
+
+## 概述
+
+Webhooks 是 Ech0 用于与外部系统交互的重要机制。  
+当实例中发生特定事件时，Ech0 会主动向已配置的 URL 发送 HTTP POST 请求，从而触发自动化工作流、消息通知或系统联动。
+
+通过 Webhook，您可以实现以下能力：
+
+- 📢 **通信集成**：自动将事件通知发送至 Slack、Discord、Telegram、Lark 等聊天平台。  
+- ⚙️ **自动化任务**：结合 Zapier、IFTTT、n8n 或自建服务，实现工作流自动化。  
+- 🧰 **开发集成**：与 GitHub、GitLab、Jira 等平台联动，实现事件追踪与同步。
+
+---
+
+## Webhook 配置
+
+### 在 Web 面板中配置
+
+您可以在 **Web 管理面板 → 外部集成** 中创建或管理 Webhook：
+
+1. 点击「新增 Webhook」。
+2. 填写配置项：
+   - **名称**：便于识别的描述性名称。
+   - **URL**：接收事件的外部服务端点（必须支持 HTTPS）。
+3. 点击「测试并保存」以验证配置是否有效。
+
+---
+
+## 支持的事件类型
+
+| 事件名称 | 描述 | 触发时机 |
+| --- | --- | --- |
+| `user.created` | 用户创建 | 注册新用户 |
+| `user.updated` | 用户信息更新 | 用户资料修改 |
+| `user.deleted` | 用户删除 | 管理员或系统删除用户 |
+| `echo.created` | 创建 Echo | 新内容发布 |
+| `echo.updated` | 更新 Echo | 编辑或修改内容 |
+| `echo.deleted` | 删除 Echo | 移除内容 |
+| `resource.uploaded` | 上传资源 | 用户上传附件或图片 |
+| `system.backup` | 系统备份完成 | 自动或手动备份任务完成 |
+| `system.restore` | 系统快照恢复完成 | 使用快照恢复后触发 |
+| `system.export` | 数据导出完成 | 用户导出数据后触发 |
+| `system.update_backup_schedule` | 更新自动备份计划 | 修改定时备份配置后触发 |
+| `deadletter.retried` | 死信任务重试 | 系统自动重试失败的 webhook 请求 |
+
+---
+
+## Webhook 消息格式
+
+```json
+{
+	"id": "01GZ3T1X2Y5H7ABCDE12345678",
+	"type": "echo.created",
+	"timestamp": "2025-11-08T06:46:01Z",
+	"data": {
+		"echo": {
+			"id": 331,
+			"content": "👨‍💻🤪🤔",
+			"username": "L1nSn0w",
+			"images": [{
+				"id": 219,
+				"message_id": 331,
+				"image_url": "https://minio.vaaat.com/ech0/1_1762584354_a3330c.jpeg",
+				"image_source": "s3",
+				"object_key": "1_1762584354_a3330c.jpeg"
+			},
+			{
+				"id": 220,
+				"message_id": 331,
+				"image_url": "https://minio.vaaat.com/ech0/1_1762584354_5c3573.jpeg",
+				"image_source": "s3",
+				"object_key": "1_1762584354_5c3573.jpeg"
+			}],
+			"private": false,
+			"user_id": 1,
+			"extension": "https://github.com/lin-snow/Ech0",
+			"extension_type": "GITHUBPROJ",
+			"tags": [{
+				"id": 3,
+				"name": "叽哩咕噜",
+				"usage_count": 21,
+				"created_at": "2025-10-11T04:07:42.11304593Z"
+			}],
+			"fav_count": 3,
+			"created_at": "2025-11-08T06:46:01.081792395Z"
+		},
+		"user": {
+			"id": 1,
+			"username": "L1nSn0w",
+			"is_admin": true,
+			"avatar": "https://your-cdn.com/avatar/1.png"
+		}
+	}
+}
+
+```
+
+>💡 Headers  
+> 每个 webhook 请求均包含以下 HTTP 头信息：  
+> X-Ech0-Event：事件类型（如 echo.created）  
+> E-Ech0-Event-ID：事件唯一标识  
+> User-Agent：Ech0-Webhook-Client  
+> Content-Type：application/json  
+>
+
+---
+
+## 重试与死信机制
+
+Ech0 内置 指数退避重试机制，当 Webhook 推送失败时，会自动尝试重发：
+
+- 首次失败后延迟 0.5 秒重试；
+- 第二次失败后延迟 1 秒；
+- 第三次失败后延迟 2 秒；
+若多次重试仍失败，事件将被写入 死信队列（Dead Letter Queue）。
+
+---
+
+## Webhook 安全
+
+幂等性保证：每个事件都带有唯一 ID，接收方可通过 E-Ech0-Event-ID 去重处理。
