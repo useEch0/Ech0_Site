@@ -1,8 +1,11 @@
 "use client";
 
-import { Copy } from 'lucide-react';
+import { useState } from 'react';
+import { Copy, Check } from 'lucide-react';
 
 export function DeploymentSection() {
+  const [copied, setCopied] = useState(false);
+
   const code = `docker run -d \\
   --name ech0 \\
   -p 6277:6277 \\
@@ -10,6 +13,16 @@ export function DeploymentSection() {
   -v /opt/ech0/backup:/app/backup \\
   -e JWT_SECRET="Hello Echos" \\
   sn0wl1n/ech0:latest`;
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   return (
     <section className="py-24 bg-primary/5">
@@ -32,11 +45,9 @@ export function DeploymentSection() {
             <button 
                 className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
                 aria-label="Copy code"
-                onClick={() => {
-                   // Simple copy logic - likely needs client directive or hydration check if strict
-                }}
+                onClick={handleCopy}
             >
-                <Copy className="w-5 h-5" />
+                {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
             </button>
         </div>
       </div>
