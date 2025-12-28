@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight, Github } from 'lucide-react';
+import TextType from '@/components/ui/texttype';
 
 export function Hero() {
   return (
@@ -8,7 +9,16 @@ export function Hero() {
       <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-white/0 via-primary/5 to-white/0 pointer-events-none" />
 
       <h1 className="relative z-10 max-w-4xl mx-auto text-5xl font-bold tracking-tight text-foreground md:text-7xl">
-        Ech0: Flow Your <span className="text-primary">Thoughts</span>
+        Ech0: Flow Your <TextType
+          text={["Thoughts", "Ideas", "Inspirations"]}
+          className="text-primary inline-block min-w-[280px] text-left"
+          cursorClassName="text-primary ml-1"
+          cursorCharacter="|"
+          loop={true}
+          variableSpeed={{ min: 50, max: 100 }}
+          deletingSpeed={30}
+          pauseDuration={2000}
+        />
       </h1>
       
       <p className="relative z-10 max-w-2xl mx-auto mt-6 text-xl text-muted-foreground md:text-2xl">
