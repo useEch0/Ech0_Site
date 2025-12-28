@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s | Ech0",
   },
   description:
-    "面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。",
+    "Next-generation open-source, self-hosted, lightweight federated publishing platform.",
   keywords: [
     "Ech0",
     "useEch0",
@@ -57,8 +57,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://ech0.soopy.cn",
     languages: {
-      en: "https://useech0.com/en",
-      zh: "https://useech0.com/zh",
+      en: "https://ech0.soopy.cn/",
+      zh: "https://ech0.soopy.cn/zh/",
     },
   },
 
@@ -85,5 +85,5 @@ export const metadata: Metadata = {
 
 export default function Page() {
   // HomePageClient 是单独的客户端组件
-  return <HomePageClient />;
+  return <HomePageClient locale="en" />;
 }

@@ -1,5 +1,6 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 
+export type SiteLocale = 'en' | 'zh';
 
 /**
  * Shared layout configurations
@@ -8,7 +9,11 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  * Home Layout: app/(home)/layout.tsx
  * Docs Layout: app/docs/layout.tsx
  */
-export function baseOptions(): BaseLayoutProps {
+export function baseOptions(locale: SiteLocale = 'en'): BaseLayoutProps {
+  const docsText = locale === 'zh' ? '文档' : 'Docs';
+  const switchText = locale === 'zh' ? 'English' : '中文';
+  const switchUrl = locale === 'zh' ? '/' : '/zh/';
+
   return {
     githubUrl: 'https://github.com/lin-snow/Ech0',
     nav: {
@@ -22,9 +27,13 @@ export function baseOptions(): BaseLayoutProps {
     // see https://fumadocs.dev/docs/ui/navigation/links
     links: [
       {
-        text: '文档',
-        url: '/docs',
-      }
+        text: docsText,
+        url: '/docs/',
+      },
+      {
+        text: switchText,
+        url: switchUrl,
+      },
     ],
   };
 }

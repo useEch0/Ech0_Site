@@ -7,10 +7,19 @@ interface FeatureSectionProps {
   icon?: ReactNode;
   imageSrc?: string;
   imageAlt?: string;
+  placeholderText?: string;
   reverse?: boolean;
 }
 
-export function FeatureSection({ title, description, icon, imageSrc, imageAlt, reverse = false }: FeatureSectionProps) {
+export function FeatureSection({
+  title,
+  description,
+  icon,
+  imageSrc,
+  imageAlt,
+  placeholderText = 'Visual Preview',
+  reverse = false,
+}: FeatureSectionProps) {
     return (
         <section className="py-24 px-4 md:px-6 overflow-hidden">
             <div className={clsx(
@@ -44,7 +53,7 @@ export function FeatureSection({ title, description, icon, imageSrc, imageAlt, r
                          ) : (
                              <div className="aspect-video w-full bg-secondary/50 flex items-center justify-center text-muted-foreground">
                                  {/* Placeholder if no image */}
-                                 <span>Visual Preview</span>
+                                 <span>{placeholderText}</span>
                              </div>
                          )}
                     </div>

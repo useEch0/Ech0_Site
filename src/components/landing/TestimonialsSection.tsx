@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { Quote } from 'lucide-react';
+import type { HomeMessages } from '@/lib/home-i18n';
 
 interface Testimonial {
   name: string;
@@ -47,7 +47,11 @@ const testimonials: Testimonial[] = [
   }
 ];
 
-export function TestimonialsSection() {
+export function TestimonialsSection({
+  messages,
+}: {
+  messages: HomeMessages['testimonials'];
+}) {
   return (
     <section className="py-24 px-4 bg-background relative overflow-hidden">
         {/* Background decorative elements */}
@@ -56,10 +60,10 @@ export function TestimonialsSection() {
         <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6 text-foreground">
-                    Loved by the Community
+                    {messages.title}
                 </h2>
                 <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                    Join the growing network of thinkers and creators using Ech0.
+                    {messages.description}
                 </p>
             </div>
 

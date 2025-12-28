@@ -6,7 +6,7 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
   return (
     <DocsLayout 
       tree={source.pageTree} 
-      {...baseOptions()}
+      {...baseOptions('en')}
 
     >
       {children}

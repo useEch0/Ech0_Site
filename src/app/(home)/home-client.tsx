@@ -6,51 +6,67 @@ import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
 import { DeploymentSection } from '@/components/landing/DeploymentSection';
 import { Footer } from '@/components/footer';
 import { Zap, Globe, Shield, PenTool } from 'lucide-react';
+import type { HomeLocale, HomeMessages } from '@/lib/home-i18n';
+import { getHomeMessages } from '@/lib/home-i18n';
 
-export default function HomePageClient() {
+export default function HomePageClient({
+  locale = 'en',
+  messages,
+  mainLang,
+}: {
+  locale?: HomeLocale;
+  messages?: HomeMessages;
+  mainLang?: string;
+}) {
+  const t = messages ?? getHomeMessages(locale);
+
   return (
-    <main className="flex flex-col min-h-screen bg-background">
-      <Hero />
+    <main className="flex flex-col min-h-screen bg-background" lang={mainLang}>
+      <Hero messages={t.hero} />
       
       <FeatureSection 
-        title="Atomic Lightweight"
-        description="Memory usage less than 15MB, image size less than 50MB. Single SQLite file storage architecture implies zero maintenance overhead."
+        title={t.features.lightweight.title}
+        description={t.features.lightweight.description}
         icon={<Zap className="w-8 h-8" />}
-        imageSrc="./images/lightweight.png" 
-        imageAlt="Performance metrics"
+        imageSrc="/images/lightweight.png" 
+        imageAlt={t.features.lightweight.imageAlt}
+        placeholderText={t.features.visualPreviewPlaceholder}
       />
 
       <FeatureSection 
-        title="Social, Connected"
-        description="Like, comment, and connect with others in a rich social environment. Explore conversations, build relationships, and stay connected across a federated universe."
+        title={t.features.social.title}
+        description={t.features.social.description}
         icon={<Globe className="w-8 h-8" />}
-        imageSrc="./images/social.png"
-        imageAlt="Social interactions"
+        imageSrc="/images/social.png"
+        imageAlt={t.features.social.imageAlt}
+        placeholderText={t.features.visualPreviewPlaceholder}
         reverse
       />
 
       <FeatureSection 
-        title="Zero-Interference Writing"
-        description="Pure online Markdown editor supporting rich plugins and live preview. Focus on your thoughts without the noise of complex interfaces."
+        title={t.features.writing.title}
+        description={t.features.writing.description}
         icon={<PenTool className="w-8 h-8" />}
         imageSrc="/images/editor.png"
-        imageAlt="Writing interface"
+        imageAlt={t.features.writing.imageAlt}
+        placeholderText={t.features.visualPreviewPlaceholder}
       />
 
       <FeatureSection 
-        title="Data Sovereignty"
-        description="All content stored locally in SQLite. Support one-click export/backup via Web, TUI, or CLI. Your data is yours, always."
+        title={t.features.sovereignty.title}
+        description={t.features.sovereignty.description}
         icon={<Shield className="w-8 h-8" />}
         imageSrc="/images/datasecure.png"
-        imageAlt="Data privacy"
+        imageAlt={t.features.sovereignty.imageAlt}
+        placeholderText={t.features.visualPreviewPlaceholder}
         reverse
       />
 
-      <TestimonialsSection />
+      <TestimonialsSection messages={t.testimonials} />
 
-      <DeploymentSection />
+      <DeploymentSection messages={t.deployment} />
 
-      <Footer />
+      <Footer locale={locale} />
     </main>
   );
 }
