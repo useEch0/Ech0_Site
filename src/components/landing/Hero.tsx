@@ -37,7 +37,7 @@ export function Hero() {
         <Link 
           href="https://github.com/lin-snow/Ech0" 
           target="_blank"
-          className="flex items-center gap-2 px-8 py-4 text-lg font-medium transition-all bg-white border rounded-full text-foreground border-border hover:bg-secondary hover:border-secondary-foreground/10"
+          className="flex items-center gap-2 px-8 py-4 text-lg font-medium transition-all rounded-full bg-white dark:bg-white/10 border border-border text-foreground hover:bg-secondary dark:hover:bg-white/20 hover:text-foreground dark:hover:text-white"
         >
           <Github className="w-5 h-5" />
           Star on GitHub
