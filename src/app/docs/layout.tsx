@@ -7,10 +7,6 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
     <DocsLayout 
       tree={source.pageTree} 
       {...baseOptions('en')}
-      search={{
-        // 使用客户端搜索（适合静态部署）
-        mode: 'client',
-      }}
     >
       {children}
     </DocsLayout>

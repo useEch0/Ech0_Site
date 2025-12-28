@@ -15,10 +15,6 @@ const config = {
   },
   // Cloudflare Pages优化
   skipTrailingSlashRedirect: true,
-  experimental: {
-    // 禁用API路由（静态部署不需要）
-    appDir: false,
-  },
 };
 
 export default withMDX(config);
