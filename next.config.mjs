@@ -8,10 +8,16 @@ const config = {
   output: 'export',
   trailingSlash: true,
   eslint: {
-    ignoreDuringBuilds: true, // ✅ 构建时忽略 ESLint 错误
+    ignoreDuringBuilds: true,
   },
   images: {
-    unoptimized: true, // 静态导出需要禁用图片优化
+    unoptimized: true,
+  },
+  // Cloudflare Pages优化
+  skipTrailingSlashRedirect: true,
+  experimental: {
+    // 禁用API路由（静态部署不需要）
+    appDir: false,
   },
 };
 
