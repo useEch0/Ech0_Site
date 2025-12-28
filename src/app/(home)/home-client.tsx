@@ -14,18 +14,18 @@ export default function HomePageClient() {
       
       <FeatureSection 
         title="Atomic Lightweight"
-        description="Memory usage less than 15MB, image size less than 40MB. Single SQLite file storage architecture implies zero maintenance overhead."
+        description="Memory usage less than 15MB, image size less than 50MB. Single SQLite file storage architecture implies zero maintenance overhead."
         icon={<Zap className="w-8 h-8" />}
-        imageSrc="./docs/imgs/tui.png" 
+        imageSrc="./images/lightweight.png" 
         imageAlt="Performance metrics"
       />
 
       <FeatureSection 
-        title="Federated Universe"
-        description="Native ActivityPub protocol support. Connect seamlessly with Mastodon, Misskey, and other platforms to build a decentralized ecosystem."
+        title="Social, Connected"
+        description="Like, comment, and connect with others in a rich social environment. Explore conversations, build relationships, and stay connected across a federated universe."
         icon={<Globe className="w-8 h-8" />}
-        imageSrc="./docs/imgs/screenshot.png"
-        imageAlt="Federation network"
+        imageSrc="./images/social.png"
+        imageAlt="Social interactions"
         reverse
       />
 
@@ -33,7 +33,7 @@ export default function HomePageClient() {
         title="Zero-Interference Writing"
         description="Pure online Markdown editor supporting rich plugins and live preview. Focus on your thoughts without the noise of complex interfaces."
         icon={<PenTool className="w-8 h-8" />}
-        // imageSrc="/writing-demo.png" // Using placeholder if image not available
+        imageSrc="/images/editor.png"
         imageAlt="Writing interface"
       />
 
@@ -41,7 +41,7 @@ export default function HomePageClient() {
         title="Data Sovereignty"
         description="All content stored locally in SQLite. Support one-click export/backup via Web, TUI, or CLI. Your data is yours, always."
         icon={<Shield className="w-8 h-8" />}
-        // imageSrc="/privacy-shield.png"
+        imageSrc="/images/datasecure.png"
         imageAlt="Data privacy"
         reverse
       />

@@ -47,7 +47,7 @@ export function Hero() {
       <div className="relative w-full max-w-5xl mt-20 perspective-[2000px]">
         <div className="overflow-hidden bg-white border rounded-xl shadow-2xl border-border/50 rotate-x-6 md:rotate-x-12 transform-style-3d">
             <img 
-              src="./docs/imgs/screenshot.png" 
+              src="./images/screenshot.png" 
               alt="Ech0 Interface" 
               className="w-full h-auto"
             />

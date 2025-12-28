@@ -34,15 +34,15 @@ export function FeatureSection({ title, description, icon, imageSrc, imageAlt, r
 
                 {/* Visual Content */}
                 <div className="flex-1 w-full max-w-xl">
-                    <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl border border-secondary bg-white group hover:shadow-2xl transition-shadow duration-500">
+                    <div className="relative rounded-2xl overflow-hidden shadow-xl border border-secondary bg-white group hover:shadow-2xl transition-shadow duration-500">
                          {imageSrc ? (
                              <img 
                                 src={imageSrc} 
                                 alt={imageAlt || title}
-                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                className="w-full h-auto block transform group-hover:scale-105 transition-transform duration-700"
                              />
                          ) : (
-                             <div className="w-full h-full bg-secondary/50 flex items-center justify-center text-muted-foreground">
+                             <div className="aspect-video w-full bg-secondary/50 flex items-center justify-center text-muted-foreground">
                                  {/* Placeholder if no image */}
                                  <span>Visual Preview</span>
                              </div>

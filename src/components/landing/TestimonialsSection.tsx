@@ -16,34 +16,34 @@ const testimonials: Testimonial[] = [
     avatar: "https://github.com/sseaan.png"
   },
   {
-    name: "continue33",
-    username: "@continue33",
-    message: "感谢修复 R2，现在体验非常顺滑！",
-    avatar: "https://github.com/continue33.png"
-  },
-  {
     name: "Rvn0xsy",
     username: "@Rvn0xsy",
-    message: "很棒的项目，我会持续关注！期待更多的功能更新。",
+    message: "很棒的项目，我会持续关注！期待更多的功能更新",
     avatar: "https://github.com/Rvn0xsy.png"
   },
   {
-    name: "匿名小伙伴",
-    username: "Anonymous",
-    message: "笨比程序员买杯糖水喝吧，支持开源精神！",
-    avatar: "" // Will use fallback
+    name: "willow-god",
+    username: "@willow-god",
+    message: "好用爱用！api也很完善，十分方便接到三方应用",
+    avatar: "https://github.com/willow-god.png"
+  },
+  {
+    name: "WindyDante",
+    username: "@WindyDante",
+    message: "短小精悍。",
+    avatar: "https://github.com/WindyDante.png"
+  },
+  {
+    name: "Trojians",
+    username: "@Trojians",
+    message: "配置简单，功能很强大，最重要的是很漂亮，UI 很好看",
+    avatar: "https://github.com/Trojians.png"
   },
   {
     name: "ljxme",
     username: "@ljxme",
-    message: "略尽绵薄之力 😋，Ech0 的轻量化设计真的很打动我。",
+    message: "Ech0 的轻量化设计真的很打动我",
     avatar: "https://github.com/ljxme.png"
-  },
-  {
-    name: "王贼臣",
-    username: "@wangzeichen",
-    message: "很好的平台，感谢 www.cardopt.cn 的支持。",
-    avatar: ""
   }
 ];
 
