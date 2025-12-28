@@ -9,7 +9,7 @@ export function Hero() {
       <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-white/0 via-primary/5 to-white/0 pointer-events-none" />
 
       <h1 className="relative z-10 max-w-4xl mx-auto text-5xl font-bold tracking-tight text-foreground md:text-7xl">
-        Ech0: Flow Your <TextType
+        Ech0 Your <TextType
           text={["Thoughts", "Ideas", "Inspirations"]}
           className="text-primary inline-block min-w-[280px] text-left"
           cursorClassName="text-primary ml-1"
