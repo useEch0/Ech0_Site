@@ -7,6 +7,10 @@ export const source = loader({
   baseUrl: '/docs',
   source: docs.toFumadocsSource(),
   plugins: [lucideIconsPlugin()],
+  // 配置客户端搜索（纯静态）
+  search: {
+    mode: 'client',
+  },
 });
 
 export function getPageImage(page: InferPageType<typeof source>) {
