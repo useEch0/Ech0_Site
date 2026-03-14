@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import HomePageClient from "./home-client";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ech0.soopy.cn"),
-  title: {
-    default: "Ech0 - Next-Generation Open Source Federated Publishing Platform",
-    template: "%s | Ech0",
-  },
+  title: "Ech0",
   description:
     "Next-generation open-source, self-hosted, lightweight federated publishing platform.",
   keywords: [
@@ -28,7 +24,7 @@ export const metadata: Metadata = {
   publisher: "Ech0 Project",
 
   openGraph: {
-    title: "Ech0 - Open Source, Self-Hosted Federated Publishing Platform",
+    title: "Ech0",
     description:
       "面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。",
     url: "https://ech0.soopy.cn",
@@ -47,7 +43,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Ech0 - Federated Publishing Platform for Creative Minds",
+    title: "Ech0",
     description:
       "面向个人的新一代开源、自托管、专注思想流动的轻量级联邦发布平台。",
     images: ["/og-image.png"],

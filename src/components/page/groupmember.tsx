@@ -20,7 +20,7 @@ type TeamMember = {
   id: string | number;
   name: string;
   role?: string;
-  bio?: string | null;
+  bio?: string;
   avatarUrl?: string | null;
   socials?: {
     github?: string;
@@ -41,7 +41,7 @@ const DEFAULT_MEMBERS: TeamMember[] = MEMBER_CONFIGS.map((m, i) => ({
   id: i,
   name: m.username,
   role: m.role,
-  bio: null,
+  bio: undefined,
   avatarUrl: null,
   socials: { github: `https://github.com/${m.username}` },
 }));
@@ -62,7 +62,7 @@ export default function ExampleTeamPage() {
           id: i,
           name: user.name || user.login,
           role: MEMBER_CONFIGS[i].role,
-          bio: user.bio || DEFAULT_MEMBERS[i].bio,
+          bio: user.bio || DEFAULT_MEMBERS[i].bio || undefined,
           avatarUrl: user.avatar_url,
           socials: {
             github: `https://github.com/${user.login}`,

@@ -1,5 +1,6 @@
 import '@/app/global.css';
 import { RootProvider } from 'fumadocs-ui/provider/next';
+import type { Metadata } from 'next';
 import {
   Caveat,
   Cormorant_Garamond,
@@ -21,6 +22,7 @@ const caveat = Caveat({
 });
 
 const maShanZheng = Ma_Shan_Zheng({
+  subsets: ['latin'],
   weight: '400',
   display: 'swap',
   variable: '--font-display-zh',
@@ -39,6 +41,14 @@ const notoSerifSC = Noto_Serif_SC({
   display: 'swap',
   variable: '--font-reading-zh',
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://ech0.soopy.cn'),
+  title: {
+    default: 'Ech0',
+    template: '%s | Ech0',
+  },
+};
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
