@@ -11,7 +11,7 @@ export type SiteLocale = 'en' | 'zh';
  */
 export function baseOptions(locale: SiteLocale = 'en'): BaseLayoutProps {
   const docsText = locale === 'zh' ? '文档' : 'Docs';
-  const switchText = locale === 'zh' ? 'English' : '中文';
+  const switchText = locale === 'zh' ? 'English' : 'CN';
   const switchUrl = locale === 'zh' ? '/' : '/zh/';
 
   return {

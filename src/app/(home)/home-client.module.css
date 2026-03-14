@@ -1,0 +1,713 @@
+.page {
+  --bg: #f2efe7;
+  --surface: #f8f6f0;
+  --surface-strong: #fefdf9;
+  --surface-muted: #ece8de;
+  --border: #d6d0c2;
+  --text: #1b1b19;
+  --text-muted: #5f5b52;
+  --text-subtle: #8d887c;
+  --accent: #191918;
+  --shadow-soft: 0 14px 40px rgba(20, 20, 18, 0.08);
+  --shadow-soft-sm: 0 6px 18px rgba(20, 20, 18, 0.06);
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+:global(.dark) .page {
+  --bg: #161615;
+  --surface: #1c1c1a;
+  --surface-strong: #22211f;
+  --surface-muted: #262522;
+  --border: #35332d;
+  --text: #f2f1ec;
+  --text-muted: #c4c1b8;
+  --text-subtle: #9d988c;
+  --accent: #f0ede5;
+  --shadow-soft: 0 16px 36px rgba(0, 0, 0, 0.38);
+  --shadow-soft-sm: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 2rem 5.5rem;
+}
+
+.hero {
+  padding: 3rem 0 3.4rem;
+  text-align: center;
+}
+
+.badge {
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  color: var(--text-subtle);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.34rem 0.68rem;
+}
+
+.heroHeadline {
+  margin-top: 1.05rem;
+  margin-bottom: 0;
+  font-size: clamp(2.1rem, 5vw, 3.8rem);
+  letter-spacing: -0.012em;
+  line-height: 1.08;
+  font-family: var(--font-display-en), "Segoe Script", cursive;
+  font-weight: 700;
+}
+
+.heroHeadline span {
+  color: var(--text-muted);
+}
+
+.page:lang(zh-CN) .heroHeadline {
+  font-family: var(--font-display-zh), "KaiTi", "STKaiti", serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.tagline {
+  margin: 0.95rem auto 0;
+  max-width: 720px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+.heroCtas {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.62rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.79rem;
+  font-weight: 500;
+  padding: 0.62rem 0.98rem;
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  transition: all 0.18s ease;
+}
+
+.primaryBtn {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #f6f6f2;
+}
+
+:global(.dark) .primaryBtn {
+  color: #151514;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-1px);
+}
+
+.secondaryBtn {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--text);
+}
+
+.secondaryBtn:hover {
+  background: var(--surface-muted);
+}
+
+.heroHint {
+  margin: 0.78rem 0 0;
+  color: var(--text-subtle);
+  font-size: 0.74rem;
+}
+
+.heroTrustRow {
+  margin-top: 1.05rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.72rem;
+}
+
+.heroTrustRow span {
+  color: #9a7f3c;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+}
+
+:global(.dark) .heroTrustRow span {
+  color: #c1a777;
+}
+
+.heroPreview {
+  margin: 1.2rem auto 0;
+  width: 100%;
+  perspective: 1600px;
+}
+
+.heroPreviewFrame {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: transparent;
+  transform-origin: center top;
+  transform: rotateX(7deg) scale(0.985);
+  transition: transform 0.28s ease;
+}
+
+.heroPreviewImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.heroPreview:hover .heroPreviewFrame {
+  transform: rotateX(5deg) scale(0.992);
+}
+
+.highlights,
+.modules,
+.lovedBy,
+.quickstart {
+  margin-top: 2rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.95rem;
+}
+
+.sectionHeader h2 {
+  margin: 0;
+  font-size: 1.28rem;
+  letter-spacing: -0.025em;
+}
+
+.highlights .sectionHeader h2 {
+  font-family: var(--font-display-en), "Segoe Script", cursive;
+  font-size: clamp(1.45rem, 2.8vw, 2.2rem);
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
+
+.page:lang(zh-CN) .highlights .sectionHeader h2 {
+  font-family: var(--font-display-zh), "KaiTi", "STKaiti", serif;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+}
+
+.sectionHeader p {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: 0.8rem;
+}
+
+.featureShowcaseList {
+  margin-top: 0.65rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.featureShowcaseItem {
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border-radius: 16px;
+  padding: 1.15rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1.1rem;
+  align-items: center;
+}
+
+.featureShowcaseItemReverse {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.featureShowcaseItemReverse .featureShowcaseCopy {
+  order: 2;
+}
+
+.featureShowcaseItemReverse .featureShowcaseVisual {
+  order: 1;
+}
+
+.featureShowcaseCopy {
+  min-width: 0;
+}
+
+.featureShowcaseEmoji {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-size: 1.2rem;
+}
+
+.featureShowcaseCopy h3 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  font-family: var(--font-display-en), "Segoe Script", cursive;
+  font-weight: 700;
+}
+
+.featureShowcaseCopy p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.78;
+  font-family: var(--font-reading-en), "Times New Roman", serif;
+  font-weight: 600;
+}
+
+.featureShowcaseDetail {
+  margin-top: 0.45rem !important;
+}
+
+.featureShowcaseCopy a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: #7f6020;
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-family: var(--font-reading-en), "Times New Roman", serif;
+  font-weight: 600;
+}
+
+.featureShowcaseCopy a:hover {
+  text-decoration: underline;
+}
+
+.page:lang(zh-CN) .featureShowcaseCopy h3 {
+  font-family: var(--font-display-zh), "KaiTi", "STKaiti", serif;
+  letter-spacing: 0.015em;
+  font-weight: 400;
+}
+
+.page:lang(zh-CN) .featureShowcaseCopy p,
+.page:lang(zh-CN) .featureShowcaseCopy a {
+  font-family: var(--font-reading-zh), "Songti SC", "STSong", serif;
+  font-weight: 500;
+}
+
+.featureShowcaseVisual {
+  min-width: 0;
+}
+
+.featureVisualCanvas {
+  border-radius: 10px;
+  background: transparent;
+  padding: 0.5rem;
+  min-height: 0;
+}
+
+.featureImageCard {
+  margin: 0;
+  border: none;
+}
+
+.featureImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.featureImage {
+  object-fit: contain;
+}
+
+.modulesHeader {
+  margin-bottom: 1rem;
+}
+
+.modulesEyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.modulesHeader h2 {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  font-family: var(--font-display-en), "Segoe Script", cursive;
+  font-weight: 700;
+}
+
+.modulesHeader p {
+  margin: 0.4rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.moduleGridEditorial {
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 14px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--surface) 83%, transparent);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.moduleCardEditorial {
+  padding: 1rem;
+  border-right: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  min-height: 230px;
+}
+
+.moduleCardEditorial:nth-child(3n) {
+  border-right: none;
+}
+
+.moduleCardMeta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  color: var(--text-subtle);
+}
+
+.moduleCardMeta span {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.moduleCardMeta small {
+  font-size: 0.68rem;
+}
+
+.moduleCardEditorial h3 {
+  margin: 0.5rem 0 0.55rem;
+  font-size: clamp(1.1rem, 2vw, 1.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.moduleCardEditorial ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.42rem;
+}
+
+.moduleCardEditorial li {
+  color: var(--text-muted);
+  font-size: 0.81rem;
+  line-height: 1.6;
+}
+
+.moduleMoreCard {
+  padding: 1rem;
+  min-height: 230px;
+  background: color-mix(in srgb, var(--surface-muted) 58%, var(--surface));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.moduleMoreCard p {
+  margin: 0;
+  color: #8b6a20;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.moduleMoreCard h3 {
+  margin: 0;
+  max-width: 240px;
+  font-size: clamp(1.25rem, 2.3vw, 2rem);
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  color: #6f4f1b;
+}
+
+.moduleMoreCard a {
+  width: fit-content;
+  border: 1px solid color-mix(in srgb, #6f4f1b 35%, var(--border));
+  border-radius: 999px;
+  color: #6f4f1b;
+  text-decoration: none;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.72rem;
+}
+
+.moduleMoreCard a:hover {
+  background: color-mix(in srgb, #6f4f1b 8%, transparent);
+}
+
+.lovedBy {
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border-radius: 18px;
+  padding: 1.3rem 1.15rem;
+}
+
+.lovedByHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.lovedByHeader h2 {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.9vw, 2.4rem);
+  letter-spacing: 0.01em;
+  font-family: var(--font-display-en), "Segoe Script", cursive;
+  font-weight: 700;
+}
+
+.page:lang(zh-CN) .modulesHeader h2,
+.page:lang(zh-CN) .lovedByHeader h2 {
+  font-family: var(--font-display-zh), "KaiTi", "STKaiti", serif;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+}
+
+.lovedByHeader p {
+  margin: 0.45rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.lovedByGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.72rem;
+}
+
+.voiceCard {
+  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  background: color-mix(in srgb, var(--surface-strong) 92%, transparent);
+  border-radius: 12px;
+  padding: 0.78rem 0.82rem;
+  box-shadow: var(--shadow-soft-sm);
+}
+
+.voiceHead {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.voiceAvatar {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+
+.voiceAvatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.voiceHead strong {
+  display: block;
+  font-size: 0.76rem;
+  line-height: 1.1;
+}
+
+.voiceHead small {
+  display: block;
+  margin-top: 0.1rem;
+  color: var(--text-subtle);
+  font-size: 0.67rem;
+}
+
+.voiceQuote {
+  margin-left: auto;
+  color: color-mix(in srgb, #c9a15f 58%, transparent);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.voiceCard p {
+  margin: 0.62rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.quickstart {
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border-radius: 18px;
+  padding: 1.35rem 1.2rem 0;
+  overflow: hidden;
+}
+
+.footerPanelTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 1.4rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+}
+
+.footerBrandBlock {
+  max-width: 480px;
+}
+
+.footerBrandTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.footerBrandBlock p {
+  margin: 0.68rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  line-height: 1.78;
+}
+
+.footerLinksGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.footerLinksGrid h4 {
+  margin: 0 0 0.5rem;
+  color: var(--text-subtle);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footerLinksGrid a {
+  display: block;
+  width: fit-content;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  line-height: 1.9;
+}
+
+.footerLinksGrid a:hover {
+  color: var(--text);
+}
+
+.footerPanelBottom {
+  margin-top: 0.55rem;
+  padding-top: 1rem;
+  height: 170px;
+  position: relative;
+}
+
+.footerPanelBottom span {
+  position: absolute;
+  left: 0;
+  bottom: -0.18em;
+  font-size: clamp(3.2rem, 17vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  color: color-mix(in srgb, var(--text-subtle) 18%, transparent);
+  user-select: none;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 0 1.25rem 4.2rem;
+  }
+
+  .featureShowcaseItem,
+  .featureShowcaseItemReverse,
+  .moduleGridEditorial,
+  .lovedByGrid,
+  .footerPanelTop {
+    grid-template-columns: 1fr;
+  }
+
+  .heroHeadline span {
+    display: block;
+    margin-top: 0.16rem;
+  }
+
+  .heroPreview {
+    margin-top: 1rem;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .featureShowcaseItemReverse .featureShowcaseCopy,
+  .featureShowcaseItemReverse .featureShowcaseVisual {
+    order: initial;
+  }
+
+  .moduleCardEditorial,
+  .moduleCardEditorial:nth-child(3n) {
+    border-right: none;
+  }
+
+  .footerLinksGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .lovedByGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .footerLinksGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .footerPanelBottom {
+    height: 120px;
+  }
+
+  .hero {
+    padding-top: 2rem;
+  }
+
+  .heroCtas {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .heroCtas a {
+    width: min(240px, 100%);
+  }
+
+  .heroPreviewFrame {
+    border-radius: 12px;
+    transform: rotateX(4deg) scale(0.995);
+  }
+
+}

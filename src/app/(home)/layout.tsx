@@ -2,5 +2,20 @@ import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import { baseOptions } from '@/lib/layout.shared';
 
 export default function Layout({ children }: LayoutProps<'/'>) {
-  return <HomeLayout {...baseOptions('en')}>{children}</HomeLayout>;
+  const options = baseOptions('en');
+  return (
+    <HomeLayout
+      {...options}
+      links={[
+        { text: 'Highlights', url: '/#highlights' },
+        { text: 'Capability', url: '/#modules' },
+        { text: 'Get Started', url: '/#quickstart' },
+        { text: 'Docs', url: '/docs/' },
+        { text: 'GitHub', url: 'https://github.com/lin-snow/Ech0' },
+        { text: 'CN', url: '/zh/' },
+      ]}
+    >
+      {children}
+    </HomeLayout>
+  );
 }

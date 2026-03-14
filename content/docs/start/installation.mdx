@@ -1,6 +1,6 @@
 ---
 title: 安装
-description: Ech0 安装部署指南
+description: Ech0 安装与部署指南（Docker / Docker Compose）
 ---
 
 {/* 
@@ -13,28 +13,27 @@ curl -fsSL "https://sh.soopy.cn/ech0.sh" -o ech0.sh && bash ech0.sh
 ```
 安装之后在终端输入`ech0`即可看到菜单 */}
 
-# 🐳 docker部署（推荐）
+# 🐳 Docker 部署（推荐）
 
 ```shell
 docker run -d \
   --name ech0 \
   -p 6277:6277 \
   -v /opt/ech0/data:/app/data \
-  -v /opt/ech0/backup:/app/backup \
   -e JWT_SECRET="Hello Echos" \
   sn0wl1n/ech0:latest
 ```
 
-> 💡 部署完成后访问 ip:6277 即可使用  
-> 🚷 建议把 `-e JWT_SECRET="Hello Echos"` 里的 `Hello Echos` 改成别的内容以提高安全性  
-> 📍 首次使用注册的账号会被设置为管理员（目前仅管理员支持发布内容）  
-> 🎈 数据存储在/opt/ech0/data下  
+> 💡 部署完成后访问 `http://<服务器IP>:6277` 即可开始使用。  
+> 🚷 建议将 `-e JWT_SECRET="Hello Echos"` 中的默认值替换为高强度随机字符串。  
+> 📍 首次注册账号会自动成为管理员（当前仅管理员可发布内容）。  
+> 🎈 数据默认持久化在 `/opt/ech0/data`。  
 
 ---
 
-# 🐋 docker-componse部署
+# 🐋 Docker Compose 部署
 
-创建一个新目录并将 `docker-compose.yml` 文件放入其中
+创建一个新目录，并将 `docker-compose.yml` 放入该目录。
 
 在该目录下执行以下命令启动服务：
 

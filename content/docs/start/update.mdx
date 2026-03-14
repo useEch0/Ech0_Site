@@ -1,6 +1,6 @@
 ---
 title: 更新
-description: 更新Ech0应用程序的详细指南
+description: Ech0 更新指南（Docker / Docker Compose）
 ---
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
@@ -14,14 +14,14 @@ curl -fsSL "https://sh.soopy.cn/ech0.sh" -o ech0.sh && bash ech0.sh
 ```
 安装之后在终端输入`ech0`即可看到菜单,在菜单中选择更新即可！ */}
 
-# 🔄 Docker部署如何更新
+# 🔄 Docker 部署更新
 
 
 
 <Steps>
 <Step>
 
-停止当前的容器
+停止当前容器
 
 ```shell
 docker stop ech0
@@ -39,7 +39,7 @@ docker rm ech0
 </Step>
 
 <Step>
-拉取最新的镜像
+拉取最新镜像
 
 ```shell
 docker pull sn0wl1n/ech0:latest
@@ -48,14 +48,13 @@ docker pull sn0wl1n/ech0:latest
 </Step>
 
 <Step>
-启动新版本的容器
+启动新版本容器
 
 ```shell
 docker run -d \
   --name ech0 \
   -p 6277:6277 \
   -v /opt/ech0/data:/app/data \
-  -v /opt/ech0/backup:/app/backup \
   -e JWT_SECRET="Hello Echos" \
   sn0wl1n/ech0:latest
 ```
@@ -64,19 +63,19 @@ docker run -d \
 
 ---
 
-# 💎 Docker Compose部署如何更新
+# 💎 Docker Compose 部署更新
 
 <Steps>
 <Step>
 
-进入 compose 文件目录
+进入 `docker-compose.yml` 所在目录
 ```shell
 cd /path/to/compose
 ```
 
 </Step>
 <Step>
-拉取最新镜像并重启
+拉取最新镜像并重建服务
 ```shell
 docker-compose pull && \
 docker-compose up -d --force-recreate
@@ -84,7 +83,7 @@ docker-compose up -d --force-recreate
 </Step>
 <Step>
 
-清理旧镜像 
+清理旧镜像（可选）
 ```shell
 docker image prune -f
 ```
