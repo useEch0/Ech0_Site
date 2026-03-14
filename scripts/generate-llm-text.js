@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { source } = require('../src/lib/source');
 const { writeFileSync } = require('fs');
 const path = require('path');

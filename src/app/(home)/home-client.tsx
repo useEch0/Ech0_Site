@@ -161,7 +161,7 @@ export default function HomePageClient({
                     <strong>{voice.name}</strong>
                     <small>{voice.handle}</small>
                   </div>
-                  <span className={styles.voiceQuote} aria-hidden="true">"</span>
+                  <span className={styles.voiceQuote} aria-hidden="true">&quot;</span>
                 </div>
                 <p>{voice.text}</p>
               </article>

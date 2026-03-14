@@ -45,6 +45,7 @@ export function FeatureSection({
                 <div className="flex-1 w-full max-w-xl">
                     <div className="relative rounded-2xl overflow-hidden shadow-xl border border-secondary bg-white group hover:shadow-2xl transition-shadow duration-500">
                          {imageSrc ? (
+                             // eslint-disable-next-line @next/next/no-img-element
                              <img 
                                 src={imageSrc} 
                                 alt={imageAlt || title}

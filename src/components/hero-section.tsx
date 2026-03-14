@@ -83,6 +83,7 @@ export function HeroSection({
       {(demoImageLight || demoImageDark) && (
         <div className="mt-8 sm:mt-12 w-full max-w-6xl overflow-hidden px-4">
           {demoImageLight && (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={demoImageLight.src}
               alt={demoImageLight.alt}
@@ -90,6 +91,7 @@ export function HeroSection({
             />
           )}
           {demoImageDark && (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={demoImageDark.src}
               alt={demoImageDark.alt}

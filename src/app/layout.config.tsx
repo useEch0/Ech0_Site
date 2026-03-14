@@ -11,6 +11,7 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
       <>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/Ech0.png" alt="Ech0" width="24" height="24" className="rounded" />
         Ech0
       </>

@@ -76,6 +76,7 @@ export function TestimonialsSection({
                         <div className="flex items-center gap-4 mb-4">
                             <div className="w-12 h-12 rounded-full overflow-hidden bg-primary/20 flex items-center justify-center shrink-0 border border-border dark:border-white/5">
                                 {t.avatar ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
                                     <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
                                 ) : (
                                     <span className="text-primary font-bold text-lg">{t.name[0]}</span>

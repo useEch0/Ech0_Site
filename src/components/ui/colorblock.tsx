@@ -59,7 +59,7 @@ export default function ColorBlock({
         await navigator.clipboard.writeText(text);
         return true;
       }
-    } catch (e) {
+    } catch {
       // fall through to fallback
     }
 
@@ -76,7 +76,7 @@ export default function ColorBlock({
       const ok = document.execCommand("copy");
       document.body.removeChild(ta);
       return ok;
-    } catch (e) {
+    } catch {
       return false;
     }
   }

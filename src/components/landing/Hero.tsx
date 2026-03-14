@@ -48,6 +48,7 @@ export function Hero({ messages }: { messages: HomeMessages['hero'] }) {
 
       <div className="relative w-full max-w-5xl mt-20 perspective-[2000px]">
         <div className="overflow-hidden bg-white border rounded-xl shadow-2xl border-border/50 rotate-x-6 md:rotate-x-12 transform-style-3d">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="/images/screenshot.png" 
               alt={messages.screenshotAlt} 

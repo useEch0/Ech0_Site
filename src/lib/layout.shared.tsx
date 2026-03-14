@@ -19,6 +19,7 @@ export function baseOptions(locale: SiteLocale = 'en'): BaseLayoutProps {
     nav: {
       title: (
         <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src='/logo.svg' alt='Ech0' className='inline h-6 mr-2' />
           Ech0
         </>
