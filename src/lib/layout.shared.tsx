@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import { LanguageSwitcher } from '@/components/ui/language-switcher';
 
 export type SiteLocale = 'en' | 'zh';
 
@@ -11,8 +12,6 @@ export type SiteLocale = 'en' | 'zh';
  */
 export function baseOptions(locale: SiteLocale = 'en'): BaseLayoutProps {
   const docsText = locale === 'zh' ? '文档' : 'Docs';
-  const switchText = locale === 'zh' ? 'English' : 'CN';
-  const switchUrl = locale === 'zh' ? '/' : '/zh/';
 
   return {
     githubUrl: 'https://github.com/lin-snow/Ech0',
@@ -24,16 +23,13 @@ export function baseOptions(locale: SiteLocale = 'en'): BaseLayoutProps {
           Ech0
         </>
       ),
+      children: <LanguageSwitcher locale={locale} />,
     },
     // see https://fumadocs.dev/docs/ui/navigation/links
     links: [
       {
         text: docsText,
         url: '/docs/',
-      },
-      {
-        text: switchText,
-        url: switchUrl,
       },
     ],
   };

@@ -141,3 +141,19 @@
   background-color: var(--primary);
   color: var(--primary-foreground);
 }
+
+#nd-docs-layout {
+  background-color: #FFFCF0;
+}
+
+.dark #nd-docs-layout {
+  background-color: var(--color-fd-background);
+}
+
+#nd-sidebar {
+  background-color: #FFF4E5;
+}
+
+.dark #nd-sidebar {
+  background-color: var(--color-fd-card);
+}

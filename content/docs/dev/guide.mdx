@@ -3,69 +3,135 @@ title: 开发指南
 description: 开发环境搭建和前后端联调指南
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
 ## 项目架构
 
-![技术架构图](/docs/Ech0技术架构图.svg)
-> by ExcaliDraw
+- 后端事件总线已切换为 [Busen](https://github.com/lin-snow/Busen)：采用 typed-first in-process 架构，并通过显式背压、hooks 与 drain shutdown 提升稳定性。
+
 ---
 
 ## 开发指南
-### 后端环境要求  
-📌 **Go 1.25.1+**
 
-📌 **C 编译器**  
-使用 `go-sqlite3` 等需要 CGO 的库时，需安装：  
-- Windows：
-    - [MinGW-w64](https://winlibs.com/)
-    - 解压后将bin目录添加到PATH
-- macOS： `brew install gcc`
-- Linux： `sudo apt install build-essential`
+### 后端环境要求
 
-📌 **Google Wire**  
-安装[wire](https://github.com/google/wire)用于依赖注入文件生成:  
-- `go install github.com/google/wire/cmd/wire@latest`
+<Steps>
+<Step>
 
-📌 **Golangci-Lint**  
-安装[Golangci-Lint](https://golangci-lint.run/)用于lint和fmt:  
-- 在项目根目录下执行`golangci-lint run`进行lint  
-- 在项目根目录下执行`golangci-lint fmt`进行格式化  
+**Go 1.26.0+**
 
-📌 **Swagger**  
-安装[Swagger](https://github.com/swaggo/gin-swagger)用于生成和使用符合OpenAPI规范的接口文档
-- 在项目根目录下执行`swag init -g internal/server/server.go -o internal/swagger`后生成或更新swagger文档  
-- 打开浏览器访问`http://localhost:6277/swagger/index.html`查看和使用swagger文档  
+</Step>
+<Step>
 
-### 前端环境要求  
-📌  **NodeJS v24.5.0+, PNPM v10.17.1+**
-> 注：如需要多个nodejs版本共存可使用[fnm](https://github.com/Schniz/fnm)进行管理  
+**C 编译器**
+
+使用 `go-sqlite3` 等需要 CGO 的库时，需安装：
+- Windows：[MinGW-w64](https://winlibs.com/)，解压后将 bin 目录添加到 PATH
+- macOS：`brew install gcc`
+- Linux：`sudo apt install build-essential`
+
+</Step>
+<Step>
+
+**Google Wire**
+
+安装 [wire](https://github.com/google/wire) 用于依赖注入文件生成：
+```bash
+go install github.com/google/wire/cmd/wire@latest
+```
+
+</Step>
+<Step>
+
+**Golangci-Lint**
+
+安装 [Golangci-Lint](https://golangci-lint.run/) 用于 lint 和 fmt：
+- 在项目根目录下执行 `golangci-lint run` 进行 lint
+- 在项目根目录下执行 `golangci-lint fmt` 进行格式化
+
+</Step>
+<Step>
+
+**Air（后端热重载，可选）**
+- 推荐通过 Makefile 安装：`make air-install`
+- 或手动安装：`go install github.com/air-verse/air@latest`
+
+</Step>
+<Step>
+
+**Swagger**
+
+安装 [Swagger](https://github.com/swaggo/gin-swagger) 用于生成和使用符合 OpenAPI 规范的接口文档：
+- 在项目根目录下执行 `swag init -g internal/server/server.go -o internal/swagger` 后生成或更新 swagger 文档
+- 打开浏览器访问 `http://localhost:6277/swagger/index.html` 查看和使用 swagger 文档
+
+</Step>
+<Step>
+
+**Event 运行参数（Busen）**
+- `ECH0_EVENT_DEFAULT_BUFFER` / `ECH0_EVENT_DEFAULT_OVERFLOW`
+- `ECH0_EVENT_DEADLETTER_BUFFER` / `ECH0_EVENT_SYSTEM_BUFFER`
+- `ECH0_EVENT_AGENT_BUFFER` / `ECH0_EVENT_AGENT_PARALLELISM`
+- `ECH0_EVENT_INBOX_BUFFER`
+- `ECH0_EVENT_WEBHOOK_POOL_WORKERS` / `ECH0_EVENT_WEBHOOK_POOL_QUEUE`
+
+</Step>
+</Steps>
+
+### 前端环境要求
+
+**NodeJS v25.5.0+, PNPM v10.30.0+**
+
+<Callout type="info">
+如需要多个 NodeJS 版本共存可使用 [fnm](https://github.com/Schniz/fnm) 进行管理。
+</Callout>
 
 ---
 
-### 启动前后端联调  
-**第一步： 后端（在 Ech0 根目录下）：**
-```shell
-go run main.go # 编译并启动后端
-```
-> 如果依赖注入关系发生了变化先需要在`ech0/internal/di/`下执行`wire`命令生成新的`wire_gen.go`文件
+### 启动前后端联调
 
-**第二步： 前端（新终端）：**  
-```shell
+<Steps>
+<Step>
+
+**后端（在 Ech0 根目录下）**
+
+```bash
+make run # 普通启动后端（等价于 go run main.go serve）
+make dev # 使用 Air 启动后端热重载
+```
+
+<Callout type="info">
+如果依赖注入关系发生了变化，需要先在 `ech0/internal/di/` 下执行 `wire` 命令生成新的 `wire_gen.go` 文件。
+</Callout>
+
+</Step>
+<Step>
+
+**前端（新终端）**
+
+```bash
 cd web # 进入前端目录
 
 pnpm install # 如果没有安装依赖则执行
 
 pnpm dev # 启动前端预览
+# 或在项目根目录执行：make web-dev
 ```
 
-**第三步： 前后端启动后访问：**  
-前端预览： http://localhost:5173 （端口在启动后可在控制台查看）  
-后端预览： http://localhost:6277 （默认后端端口为6277） 
+</Step>
+<Step>
 
-> 对使用**层次化架构的包**进行导入时，请使用**规范的 alias 命名**：  
-> model 层： `xxxModel`  
-> util 层： `xxxUtil`  
-> handler 层： `xxxHandler`  
-> service 层： `xxxService`  
-> repository 层： `xxxRepository`  
+**前后端启动后访问**
+
+前端预览：http://localhost:5173（端口在启动后可在控制台查看）
+后端预览：http://localhost:6277（默认后端端口为 6277）
+
+</Step>
+</Steps>
+
+<Callout type="info">
+对使用层次化架构的包进行导入时，请使用规范的 alias 命名：model 层 `xxxModel`、util 层 `xxxUtil`、handler 层 `xxxHandler`、service 层 `xxxService`、repository 层 `xxxRepository`。
+</Callout>
 
 ---

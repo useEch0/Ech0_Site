@@ -4,26 +4,29 @@ description: Ech0 更新指南（Docker / Docker Compose）
 ---
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
 
-{/* # 🔄 脚本一键更新（推荐）
+{/* # 脚本一键更新（推荐）
 
 > 请确保网络可以访问GitHub Release才能安装或更新
 
-```shell
+```bash
 curl -fsSL "https://sh.soopy.cn/ech0.sh" -o ech0.sh && bash ech0.sh
 ```
 安装之后在终端输入`ech0`即可看到菜单,在菜单中选择更新即可！ */}
 
-# 🔄 Docker 部署更新
+<Callout type="warn">
+目前不支持从 v3 直接更新到 v4。请先在 v3 面板中点击"导出快照"，然后重新部署 v4，并在 v4 面板中选择"v3 迁移"即可导入原有数据。
+</Callout>
 
-
+# Docker 部署更新
 
 <Steps>
 <Step>
 
 停止当前容器
 
-```shell
+```bash
 docker stop ech0
 ```
 
@@ -33,7 +36,7 @@ docker stop ech0
 <Step>
 移除容器
 
-```shell
+```bash
 docker rm ech0
 ```
 </Step>
@@ -41,7 +44,7 @@ docker rm ech0
 <Step>
 拉取最新镜像
 
-```shell
+```bash
 docker pull sn0wl1n/ech0:latest
 ```
 
@@ -50,7 +53,7 @@ docker pull sn0wl1n/ech0:latest
 <Step>
 启动新版本容器
 
-```shell
+```bash
 docker run -d \
   --name ech0 \
   -p 6277:6277 \
@@ -63,20 +66,20 @@ docker run -d \
 
 ---
 
-# 💎 Docker Compose 部署更新
+# Docker Compose 部署更新
 
 <Steps>
 <Step>
 
 进入 `docker-compose.yml` 所在目录
-```shell
+```bash
 cd /path/to/compose
 ```
 
 </Step>
 <Step>
 拉取最新镜像并重建服务
-```shell
+```bash
 docker-compose pull && \
 docker-compose up -d --force-recreate
 ```
@@ -84,7 +87,7 @@ docker-compose up -d --force-recreate
 <Step>
 
 清理旧镜像（可选）
-```shell
+```bash
 docker image prune -f
 ```
 </Step>

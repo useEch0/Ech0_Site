@@ -3,16 +3,18 @@ title: 高可用 Webhook
 description: 支持与外部系统进行实时扩展与协作，实现事件驱动的自动化工作流
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+
 ## 概述
 
-Webhooks 是 Ech0 用于与外部系统交互的重要机制。  
+Webhooks 是 Ech0 用于与外部系统交互的重要机制。
 当实例中发生特定事件时，Ech0 会主动向已配置的 URL 发送 HTTP POST 请求，从而触发自动化工作流、消息通知或系统联动。
 
 通过 Webhook，您可以实现以下能力：
 
-- 📢 **通信集成**：自动将事件通知发送至 Slack、Discord、Telegram、Lark 等聊天平台。  
-- ⚙️ **自动化任务**：结合 Zapier、IFTTT、n8n 或自建服务，实现工作流自动化。  
-- 🧰 **开发集成**：与 GitHub、GitLab、Jira 等平台联动，实现事件追踪与同步。
+- **通信集成**：自动将事件通知发送至 Slack、Discord、Telegram、Lark 等聊天平台。
+- **自动化任务**：结合 Zapier、IFTTT、n8n 或自建服务，实现工作流自动化。
+- **开发集成**：与 GitHub、GitLab、Jira 等平台联动，实现事件追踪与同步。
 
 ---
 
@@ -99,27 +101,27 @@ Webhooks 是 Ech0 用于与外部系统交互的重要机制。
 
 ```
 
->💡 Headers  
-> 每个 webhook 请求均包含以下 HTTP 头信息：  
-> X-Ech0-Event：事件类型（如 echo.created）  
-> E-Ech0-Event-ID：事件唯一标识  
-> User-Agent：Ech0-Webhook-Client  
-> Content-Type：application/json  
->
+<Callout type="info">
+**Headers**：每个 Webhook 请求均包含以下 HTTP 头信息：
+- `X-Ech0-Event`：事件类型（如 `echo.created`）
+- `E-Ech0-Event-ID`：事件唯一标识
+- `User-Agent`：`Ech0-Webhook-Client`
+- `Content-Type`：`application/json`
+</Callout>
 
 ---
 
 ## 重试与死信机制
 
-Ech0 内置 指数退避重试机制，当 Webhook 推送失败时，会自动尝试重发：
+Ech0 内置指数退避重试机制，当 Webhook 推送失败时，会自动尝试重发：
 
 - 首次失败后延迟 0.5 秒重试；
 - 第二次失败后延迟 1 秒；
 - 第三次失败后延迟 2 秒；
-若多次重试仍失败，事件将被写入 死信队列（Dead Letter Queue）。
+若多次重试仍失败，事件将被写入死信队列（Dead Letter Queue）。
 
 ---
 
 ## Webhook 安全
 
-幂等性保证：每个事件都带有唯一 ID，接收方可通过 E-Ech0-Event-ID 去重处理。
+幂等性保证：每个事件都带有唯一 ID，接收方可通过 `E-Ech0-Event-ID` 去重处理。
