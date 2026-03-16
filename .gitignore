@@ -28,3 +28,6 @@ yarn-error.log*
 next-env.d.ts
 
 *.zip
+
+.claude
+.history

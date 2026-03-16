@@ -12,12 +12,9 @@ export default function Layout({ children }: LayoutProps<'/zh'>) {
         { text: '快速开始', url: '/zh/#quickstart' },
         { text: '文档', url: '/docs/' },
         { text: 'GitHub', url: 'https://github.com/lin-snow/Ech0' },
-        { text: 'English', url: '/' },
       ]}
     >
       {children}
     </HomeLayout>
   );
 }
-
-

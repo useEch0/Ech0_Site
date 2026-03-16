@@ -57,7 +57,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       className={`${notoSansSC.className} ${caveat.variable} ${maShanZheng.variable} ${cormorant.variable} ${notoSerifSC.variable}`}
       suppressHydrationWarning
     >
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen" suppressHydrationWarning>
         <RootProvider>{children}</RootProvider>
       </body>
     </html>

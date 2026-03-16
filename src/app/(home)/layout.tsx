@@ -12,7 +12,6 @@ export default function Layout({ children }: LayoutProps<'/'>) {
         { text: 'Get Started', url: '/#quickstart' },
         { text: 'Docs', url: '/docs/' },
         { text: 'GitHub', url: 'https://github.com/lin-snow/Ech0' },
-        { text: 'CN', url: '/zh/' },
       ]}
     >
       {children}
