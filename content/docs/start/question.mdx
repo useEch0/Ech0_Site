@@ -32,8 +32,8 @@ Ech0 不是传统的笔记软件，设计之初并不是为了专业的笔记管
 当前版本设计上，只有管理员可以发布内容。部署后，首个注册的用户会自动被设置为系统管理员，其他用户无法发布内容（可在设置中分配权限）。
 </Accordion>
 
-<Accordion title="为什么没有明确的权限划分？">
-Ech0 旨在保持简洁和轻量，因此在设计时没有复杂的权限系统。我们希望用户能够专注于分享内容，而不是被复杂的权限管理所困扰。为了保持流畅的使用体验，Ech0 尽量精简了功能，避免不必要的复杂性。（因此目前只有管理员与非管理员之分，所以请谨慎分配你的权限）。
+<Accordion title="Ech0 的权限模型是怎样的？">
+Ech0 提供四级权限角色：**Owner**（最高权限，管理系统设置、管理员和所有用户）、**Admin**（管理内容、评论、文件和部分设置）、**User**（管理自己的 Echo 和文件）、**Guest**（浏览公开内容、点赞和评论）。首个注册用户自动成为 Owner，Owner 可在用户管理中为其他用户分配管理员权限。系统默认最多 5 个用户账号。
 </Accordion>
 
 <Accordion title="为什么别人无法显示自己的 Connect 头像？">
@@ -53,7 +53,7 @@ Ech0 发布的内容分为三部分：文字、图片、扩展内容（如音乐
 </Accordion>
 
 <Accordion title="如何开启评论功能？">
-在设置页面的`评论设置`中选择评论服务并填写对应参数即可。当前支持 Twikoo / Waline / Artalk / Giscus，不同服务的必填字段会在界面中动态展示。
+在 **系统设置 → 评论设置** 中启用内建评论功能即可。可选配置是否需要审核、是否启用 CAP 验证码。Ech0 使用完全内建的原生评论系统，无需任何第三方评论服务。
 </Accordion>
 
 <Accordion title="S3 存储如何配置？">
@@ -61,6 +61,18 @@ Ech0 发布的内容分为三部分：文字、图片、扩展内容（如音乐
 </Accordion>
 
 <Accordion title="如何启用 Passkey 无密码登录？">
-在 SSO - Passkey 页面先配置 WebAuthn RP ID 与 WebAuthn Origins，保存并显示"Passkey 就绪"后，再按浏览器提示绑定你常用的生物识别或安全密钥设备即可使用。
+在 **SSO → Passkey** 页面先配置 WebAuthn RP ID（域名）与 WebAuthn Origins（站点完整 URL），保存并显示"Passkey 就绪"后，再按浏览器提示绑定你常用的生物识别或安全密钥设备即可使用。详见 [Passkey 指南](/docs/guide/passkey)。
+</Accordion>
+
+<Accordion title="如何使用 AI Agent 摘要功能？">
+在 **系统设置 → Agent** 中启用 Agent，选择 LLM 提供商（OpenAI/DeepSeek/Claude/Gemini/Qwen/Ollama/Custom），填写 API Key 和模型名称即可。摘要结果通过 `/api/agent/recent` 公开访问。
+</Accordion>
+
+<Accordion title="Zone 热敏打印台是什么？">
+Zone 是 Ech0 独有的创意功能，模拟热敏打印机将 Echo 内容"打印"为可拖拽的纸质卡片。访问 `/zone` 体验，卡片位置自动保存到浏览器本地存储。
+</Accordion>
+
+<Accordion title="如何调用 Ech0 API？">
+通过 **系统设置 → 访问令牌** 生成 Token，在请求头中携带 `Authorization: Bearer <token>`。完整接口文档见 `/swagger/index.html`。
 </Accordion>
 </Accordions>

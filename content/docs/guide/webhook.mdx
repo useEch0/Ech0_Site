@@ -1,5 +1,5 @@
 ---
-title: 高可用 Webhook
+title: Webhook 事件推送
 description: 支持与外部系统进行实时扩展与协作，实现事件驱动的自动化工作流
 ---
 
@@ -7,121 +7,135 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 ## 概述
 
-Webhooks 是 Ech0 用于与外部系统交互的重要机制。
-当实例中发生特定事件时，Ech0 会主动向已配置的 URL 发送 HTTP POST 请求，从而触发自动化工作流、消息通知或系统联动。
+Webhook 是 Ech0 的事件推送能力。当系统内发生关键事件时，Ech0 会通过 HTTP POST 推送 JSON 到你配置的 URL。
 
-通过 Webhook，您可以实现以下能力：
+通过 Webhook，您可以实现：
 
-- **通信集成**：自动将事件通知发送至 Slack、Discord、Telegram、Lark 等聊天平台。
-- **自动化任务**：结合 Zapier、IFTTT、n8n 或自建服务，实现工作流自动化。
-- **开发集成**：与 GitHub、GitLab、Jira 等平台联动，实现事件追踪与同步。
+- **通信集成**：自动将事件通知发送至 Slack、Discord、Telegram、Lark 等平台
+- **自动化任务**：结合 Zapier、IFTTT、n8n 或自建服务，实现工作流自动化
+- **开发集成**：与 GitHub、GitLab、Jira 等平台联动
 
 ---
 
-## Webhook 配置
+## 配置
 
-### 在 Web 面板中配置
+在 **系统设置 → Webhook** 中创建或管理 Webhook：
 
-您可以在 **Web 管理面板 → 外部集成** 中创建或管理 Webhook：
-
-1. 点击「新增 Webhook」。
+1. 点击「新建 Webhook」
 2. 填写配置项：
-   - **名称**：便于识别的描述性名称。
-   - **URL**：接收事件的外部服务端点（必须支持 HTTPS）。
-3. 点击「测试并保存」以验证配置是否有效。
+   - **名称**：便于识别的描述性名称
+   - **URL**：接收事件的外部服务端点（必须为 `http://` 或 `https://`）
+   - **Secret**：签名密钥（可选，用于 HMAC-SHA256 签名校验）
+   - **启用状态**：是否激活
+3. 可点击「测试」验证连通性
+
+<Callout type="warn">
+**URL 安全校验（防 SSRF）**：禁止 `localhost`、`.local` 域名和内网/环回 IP（`127.*`、`10.*`、`192.168.*` 等）。本地调试建议通过公开可访问的临时隧道域名。
+</Callout>
 
 ---
 
-## 支持的事件类型
+## 支持的事件（白名单）
 
-| 事件名称 | 描述 | 触发时机 |
-| --- | --- | --- |
-| `user.created` | 用户创建 | 注册新用户 |
-| `user.updated` | 用户信息更新 | 用户资料修改 |
-| `user.deleted` | 用户删除 | 管理员或系统删除用户 |
-| `echo.created` | 创建 Echo | 新内容发布 |
-| `echo.updated` | 更新 Echo | 编辑或修改内容 |
-| `echo.deleted` | 删除 Echo | 移除内容 |
-| `resource.uploaded` | 上传资源 | 用户上传附件或图片 |
-| `system.backup` | 系统备份完成 | 自动或手动备份任务完成 |
-| `system.restore` | 系统快照恢复完成 | 使用快照恢复后触发 |
-| `system.export` | 数据导出完成 | 用户导出数据后触发 |
-| `system.update_backup_schedule` | 更新自动备份计划 | 修改定时备份配置后触发 |
-| `deadletter.retried` | 死信任务重试 | 系统自动重试失败的 webhook 请求 |
+| Topic | 触发时机 |
+| --- | --- |
+| `user.created` | 新用户注册 |
+| `user.updated` | 用户信息更新 |
+| `user.deleted` | 用户被删除 |
+| `echo.created` | 新 Echo 发布 |
+| `echo.updated` | Echo 内容更新 |
+| `echo.deleted` | Echo 被删除 |
+| `comment.created` | 新评论发表 |
+| `comment.status.updated` | 评论审核状态变更 |
+| `comment.deleted` | 评论被删除 |
+| `resource.uploaded` | 文件上传完成 |
+| `system.backup` | 备份执行 |
+| `system.export` | 数据导出 |
+| `system.backup_schedule.updated` | 备份计划变更 |
+| `inbox.clear` | 收件箱清空 |
+| `ech0.update.check` | 版本更新检查 |
+
+<Callout type="info">
+`deadletter.retried` 不是对外 Webhook 事件，它是内部死信重放事件。
+</Callout>
 
 ---
 
-## Webhook 消息格式
+## 请求格式
+
+每个 Webhook 请求包含以下 HTTP 头：
+
+| Header | 说明 |
+| --- | --- |
+| `Content-Type` | `application/json` |
+| `User-Agent` | `Ech0-Webhook-Client` |
+| `X-Ech0-Event` | 事件 topic（如 `echo.created`） |
+| `X-Ech0-Event-ID` | 事件 ID（纳秒时间戳字符串） |
+| `X-Ech0-Timestamp` | Unix 秒级时间戳（UTC） |
+| `X-Ech0-Signature` | `sha256=<hex>`（仅配置 secret 时） |
+
+请求体：
 
 ```json
 {
-	"id": "01GZ3T1X2Y5H7ABCDE12345678",
-	"type": "echo.created",
-	"timestamp": "2025-11-08T06:46:01Z",
-	"data": {
-		"echo": {
-			"id": 331,
-			"content": "👨‍💻🤪🤔",
-			"username": "L1nSn0w",
-			"images": [{
-				"id": 219,
-				"message_id": 331,
-				"image_url": "https://minio.vaaat.com/ech0/1_1762584354_a3330c.jpeg",
-				"image_source": "s3",
-				"object_key": "1_1762584354_a3330c.jpeg"
-			},
-			{
-				"id": 220,
-				"message_id": 331,
-				"image_url": "https://minio.vaaat.com/ech0/1_1762584354_5c3573.jpeg",
-				"image_source": "s3",
-				"object_key": "1_1762584354_5c3573.jpeg"
-			}],
-			"private": false,
-			"user_id": 1,
-			"extension": "https://github.com/lin-snow/Ech0",
-			"extension_type": "GITHUBPROJ",
-			"tags": [{
-				"id": 3,
-				"name": "叽哩咕噜",
-				"usage_count": 21,
-				"created_at": "2025-10-11T04:07:42.11304593Z"
-			}],
-			"fav_count": 3,
-			"created_at": "2025-11-08T06:46:01.081792395Z"
-		},
-		"user": {
-			"id": 1,
-			"username": "L1nSn0w",
-			"is_admin": true,
-			"avatar": "https://your-cdn.com/avatar/1.png"
-		}
-	}
+  "topic": "echo.created",
+  "event_name": "EchoCreatedEvent",
+  "payload_raw": { "...": "具体事件载荷" },
+  "metadata": { "...": "附加元信息" },
+  "occurred_at": 1710000000
 }
-
 ```
 
-<Callout type="info">
-**Headers**：每个 Webhook 请求均包含以下 HTTP 头信息：
-- `X-Ech0-Event`：事件类型（如 `echo.created`）
-- `E-Ech0-Event-ID`：事件唯一标识
-- `User-Agent`：`Ech0-Webhook-Client`
-- `Content-Type`：`application/json`
-</Callout>
+---
+
+## 签名校验
+
+当配置了 `secret` 时，Ech0 会对请求体做 HMAC-SHA256 签名：
+
+- 算法：`HMAC_SHA256(secret, rawBodyBytes)`
+- Header：`X-Ech0-Signature: sha256=<hex>`
+
+接收端校验示例（Node.js）：
+
+```js
+import crypto from 'node:crypto'
+
+function verifyEch0Signature(rawBody, secret, signatureHeader) {
+  if (!signatureHeader || !signatureHeader.startsWith('sha256=')) return false
+  const received = signatureHeader.slice('sha256='.length)
+  const expected = crypto.createHmac('sha256', secret).update(rawBody).digest('hex')
+  return crypto.timingSafeEqual(Buffer.from(received), Buffer.from(expected))
+}
+```
+
+建议同时校验：
+- `X-Ech0-Timestamp`（防重放，限制时间窗口）
+- `X-Ech0-Event-ID`（幂等去重）
 
 ---
 
 ## 重试与死信机制
 
-Ech0 内置指数退避重试机制，当 Webhook 推送失败时，会自动尝试重发：
+Ech0 内置指数退避重试：
 
-- 首次失败后延迟 0.5 秒重试；
-- 第二次失败后延迟 1 秒；
-- 第三次失败后延迟 2 秒；
-若多次重试仍失败，事件将被写入死信队列（Dead Letter Queue）。
+- 最多 3 次尝试（测试接口为 2 次）
+- 退避间隔：500ms → 1s → 2s
+- 请求超时：5 秒
+- 成功判定：接收端返回 HTTP 2xx
+
+重试仍失败的事件进入**死信队列**：
+- 初始 `next_retry`：6 小时后
+- 后台每 5 分钟扫描可重试死信
+- 重试次数达到阈值后标记丢弃
+
+每次投递结束更新 Webhook 的 `last_status`（success/failed）和 `last_trigger`。
 
 ---
 
-## Webhook 安全
+## 接收端最佳实践
 
-幂等性保证：每个事件都带有唯一 ID，接收方可通过 `E-Ech0-Event-ID` 去重处理。
+- 做幂等：用 `X-Ech0-Event-ID` 去重
+- 做鉴权：校验 `X-Ech0-Signature`
+- 做防重放：校验 `X-Ech0-Timestamp` 时间窗口
+- 快速 ACK：先入队再异步处理，避免超时
+- 可观测：记录 topic、event_id、status、延迟

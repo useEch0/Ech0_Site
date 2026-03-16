@@ -1,0 +1,63 @@
+---
+title: AI Agent 摘要
+description: 集成 LLM 自动生成近期内容摘要
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## 概述
+
+Ech0 集成了 LLM Agent 功能，可自动生成近期内容摘要，帮助访客快速了解你最近的动态。
+
+---
+
+## 支持的 LLM 提供商
+
+| 提供商标识 | 说明 |
+| --- | --- |
+| `openai` | OpenAI GPT 系列 |
+| `deepseek` | DeepSeek 系列 |
+| `anthropic` | Anthropic Claude 系列 |
+| `gemini` | Google Gemini |
+| `qwen` | Qwen（通义千问） |
+| `ollama` | 本地部署的开源模型 |
+| `custom` | 自定义 OpenAI 兼容 API（兜底方案） |
+
+---
+
+## 配置
+
+在 **系统设置 → Agent** 中配置：
+
+| 配置项 | 说明 |
+| --- | --- |
+| Enable | 是否启用 Agent |
+| Provider | LLM 提供商标识 |
+| Model | 模型名称（如 `gpt-4o`、`deepseek-chat`） |
+| ApiKey | API 密钥 |
+| BaseURL | 自定义 API 端点（Ollama 或 Custom 提供商必填） |
+| Prompt | 自定义系统提示词 |
+
+<Callout type="info">
+选择 `custom` 提供商时，只需提供 OpenAI 兼容的 API 端点和密钥即可接入任意兼容服务。
+</Callout>
+
+---
+
+## 运行机制
+
+- 从最近的 Echo 中构建上下文
+- 使用 CloudWeGo Eino 框架调用 LLM
+- 单次缓存（Single-Flight 模式），避免重复生成
+- 生成完成后通过收件箱通知管理员
+
+---
+
+## API
+
+| 方法 | 路径 | 认证 | 说明 |
+| --- | --- | --- | --- |
+| GET | `/api/agent/recent` | 否 | 获取 AI 摘要（公开） |
+| GET | `/api/agent/info` | 否 | 获取 Agent 状态 |
+| GET | `/api/agent/settings` | 是 | 获取 Agent 配置 |
+| PUT | `/api/agent/settings` | 是 | 更新 Agent 配置 |

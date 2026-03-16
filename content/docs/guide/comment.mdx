@@ -1,24 +1,69 @@
 ---
-title: 评论接入
-description: Ech0 评论系统说明，支持多种评论服务
+title: 评论系统
+description: Ech0 内建原生评论系统，支持访客评论、审核管理与防垃圾机制
 ---
 
-Ech0 支持多种评论服务接入，同时也内建了评论系统，无需第三方服务即可使用。
+import { Callout } from 'fumadocs-ui/components/callout';
 
-## 支持的评论服务
-
-- **Twikoo** — 轻量、快捷、无侵入
-- **Waline** — 安全、快速的评论系统
-- **Artalk** — 自托管评论系统
-- **Giscus** — 基于 GitHub Discussions 的评论系统
-- **内建评论系统** — 无需任何第三方服务
+Ech0 内建了完整的原生评论系统，无需依赖任何第三方评论服务（Twikoo、Waline、Artalk、Giscus 等均已移除）。
 
 ## 启用
 
-在 Ech0 设置中进入`评论设置`，选择你想使用的评论服务并填写对应参数即可。不同服务的必填字段会在界面中动态展示。
+在 **系统设置 → 评论设置** 中开启评论功能即可。可选配置项：
 
-如果你不需要第三方评论服务，也可以直接使用内建评论系统，只需在设置中启用评论开关即可。
+- **是否启用评论**：全局开关
+- **是否需要审核**：开启后访客评论需管理员审核才会公开显示
+- **验证码**：可选集成 CAP（Comment Adapter Platform）验证码服务
 
-## 管理
+## 评论类型
 
-你可以在后台直接管理评论内容，包括审核、删除与状态调整。
+- **访客评论**（`source: guest`）：无需登录，需填写昵称和邮箱（可选网站），默认需要管理员审核
+- **系统评论**（`source: system`）：管理员/Owner 发表的评论，自动通过审核，无需邮箱
+
+<Callout type="info">
+评论正文最多 200 个 UTF-8 字符。
+</Callout>
+
+## 审核流程
+
+评论状态流转：`pending`（待审核）→ `approved`（已通过）/ `rejected`（已拒绝）
+
+- 管理面板中支持按状态筛选、关键词搜索
+- 支持单条和批量操作（审核通过、拒绝、删除）
+- 可将优质评论标记为"热评"（`hot: true`）
+
+## 防垃圾机制
+
+Ech0 内建多层防垃圾保护：
+
+- **表单 Token**：HMAC-SHA256 签名验证，最短提交间隔 2 秒，Token 24 小时过期
+- **蜜罐字段**（Honeypot）：隐藏字段检测机器人
+- **频率限制**：同一 IP 或邮箱每分钟最多 3 条、每小时最多 20 条
+- **重复检测**：90 秒内同一来源的相同内容不可重复提交
+- **CAP 验证码**：可选集成 [CAP](https://github.com/user/cap) 验证码服务
+
+## CAP 验证码集成
+
+CAP（Comment Adapter Platform）是可选的验证码服务。可通过 `docker-compose.cap.yml` 一键部署：
+
+```bash
+docker compose -f docker-compose.cap.yml up -d
+```
+
+部署后在评论设置中配置：
+- **CaptchaVerify**：CAP 验证端点 URL（如 `http://cap:3000/verify`）
+- **CaptchaSecret**：CAP 密钥
+
+<Callout type="warn">
+CAP 为可选组件，不配置验证码时评论系统仍可正常工作。
+</Callout>
+
+## 评论事件
+
+评论相关操作会触发 Webhook 事件：
+
+| 事件 | 说明 |
+| --- | --- |
+| `comment.created` | 新评论发表 |
+| `comment.status.updated` | 评论审核状态变更 |
+| `comment.deleted` | 评论被删除 |
