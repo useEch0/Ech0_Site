@@ -1,0 +1,80 @@
+---
+title: Passkey 无密码登录
+description: 基于 FIDO2/WebAuthn 标准的无密码认证
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## 概述
+
+Ech0 支持 Passkey（通行密钥）无密码登录，基于 FIDO2/WebAuthn 标准，支持生物识别（指纹、面容）或硬件安全密钥。
+
+---
+
+## 配置步骤
+
+<Steps>
+<Step>
+
+**配置 WebAuthn**
+
+在 **系统设置 → SSO → Passkey** 中填写：
+
+- **WebAuthn RP ID**：通常为你的域名（如 `memo.vaaat.com`）
+- **WebAuthn Origins**：站点完整 URL（如 `https://memo.vaaat.com`）
+
+</Step>
+<Step>
+
+**保存配置**
+
+保存后页面应显示"Passkey 就绪"状态。
+
+</Step>
+<Step>
+
+**绑定设备**
+
+点击"注册 Passkey"，浏览器会弹出系统认证提示，按提示完成生物识别或安全密钥绑定。
+
+</Step>
+</Steps>
+
+---
+
+## 功能特性
+
+- 支持 Discoverable Credentials（Resident Keys）
+- 支持多设备管理：注册、列表、重命名、删除
+- 签名计数器（SignCount）验证防止凭证克隆
+- 登录时直接使用已注册设备进行无密码认证
+
+---
+
+## 设备管理
+
+在 Passkey 管理页面可以：
+
+- 查看所有已注册设备列表
+- 重命名设备（便于识别不同设备）
+- 删除不再使用的设备
+
+<Callout type="warn">
+RP ID 和 Origins 必须与你的实际部署域名匹配，否则浏览器会拒绝 WebAuthn 操作。
+</Callout>
+
+---
+
+## API
+
+| 方法 | 路径 | 认证 | 说明 |
+| --- | --- | --- | --- |
+| POST | `/api/passkey/login/begin` | 否 | 开始登录挑战 |
+| POST | `/api/passkey/login/finish` | 否 | 完成登录验证 |
+| POST | `/api/passkey/register/begin` | 是 | 开始注册新 Passkey |
+| POST | `/api/passkey/register/finish` | 是 | 完成注册 |
+| GET | `/api/passkeys` | 是 | 列出所有 Passkey |
+| PUT | `/api/passkeys/:id` | 是 | 重命名设备 |
+| DELETE | `/api/passkeys/:id` | 是 | 删除 Passkey |
+| GET | `/api/passkey/status` | 否 | 检查是否启用 |

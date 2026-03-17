@@ -1,20 +1,38 @@
 ---
 title: Ech0 Connect
-description: 多实例间互通、内容订阅与同步
+description: 多实例间互通与内容聚合
 ---
 
-Ech0 原创的内容聚合与互联功能，支持多实例间互通、内容订阅与同步，打造属于个人的去中心化内容网络
+import { Callout } from 'fumadocs-ui/components/callout';
+
+Ech0 原创的内容聚合与互联功能，支持多实例间互通，打造属于个人的去中心化内容网络。
 
 ## 配置
 
-在设置中编辑 Ech0 Connect 设置
+在 **系统设置 → Connect** 中配置：
 
-在输入框中输入 Ech0 地址，如 http(s)://ech0.example.com，点击加号
+1. 在输入框中输入 Ech0 实例地址，如 `https://ech0.example.com`
+2. 点击加号添加
+
+<Callout type="warn">
+需在 **系统设置 → 服务地址** 中正确填写自身实例的完整 URL（含 `http://` 或 `https://`），否则其他实例无法获取你的头像等信息。
+</Callout>
 
 ## 查看
 
-在 Ech0 首页即可看到右栏中的 "连接到的 Ech0:" 下方出现添加的 Ech0 的 Icon
+在首页右栏的"连接到的 Ech0"下方会显示已添加实例的 Icon：
 
-如当天该 Ech0 有更新，则 Icon 右上方小圆点显示绿色，否则显示灰色
+- 当天有更新的实例 Icon 右上方显示绿色小圆点，否则显示灰色
+- 鼠标悬停时显示：管理员名称、Echo 总数、今日 Echo 数、版本号
 
-鼠标移到 Icon 上时，会显示该 Ech0 的管理员，echo 总数与今日数
+## 工作原理
+
+- 后端定期通过 HTTP 请求获取各实例信息
+- 每个实例返回：ServerName、ServerURL、Logo、TotalEchos、TodayEchos、SysUsername、Version
+- 不可达的实例自动过滤，只返回有效实例数据
+- 重试机制：3 次尝试，指数退避（1s → 2s → 4s），单次超时 3 秒，总超时 20 秒
+- 自动去重（防止同一 URL 重复出现）
+
+## Hub 联邦聚合
+
+Connect 配置的实例数据会被 [Hub 功能](/docs/guide/hub) 用于联邦内容聚合，从多个实例拉取并合并展示 Echo 内容。访问 `/hub` 即可查看。

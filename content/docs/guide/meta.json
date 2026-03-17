@@ -1,13 +1,19 @@
 {
     "title": "功能指南",
     "pages": [
-        "connect",
+        "editor",
+        "zone",
         "comment",
-        "metingapi",
+        "connect",
+        "hub",
+        "agent",
         "oauth",
+        "passkey",
         "s3",
-        "datacontrol",
+        "metingapi",
         "webhook",
-        "accesstoken"
+        "accesstoken",
+        "inbox",
+        "datacontrol"
     ]
 }
